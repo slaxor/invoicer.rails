@@ -8,7 +8,7 @@ gem 'rails', '3.0.0.beta4'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'
@@ -27,3 +27,4 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 # group :test do
 #   gem 'webrat'
 # end
+gem 'haml'
