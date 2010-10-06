@@ -1,0 +1,29 @@
+<h1>Listing pauses</h1>
+
+<table>
+  <tr>
+    <th>Invoice item service</th>
+    <th>Started at</th>
+    <th>Ended at</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @pauses.each do |pause| %>
+  <tr>
+    <td><%= pause.invoice_item_service_id %></td>
+    <td><%= pause.started_at %></td>
+    <td><%= pause.ended_at %></td>
+    <td><%= pause.description %></td>
+    <td><%= link_to 'Show', pause %></td>
+    <td><%= link_to 'Edit', edit_pause_path(pause) %></td>
+    <td><%= link_to 'Destroy', pause, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Pause', new_pause_path %>

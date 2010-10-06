@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invoice item service:</b>
+  <%= @pause.invoice_item_service_id %>
+</p>
+
+<p>
+  <b>Started at:</b>
+  <%= @pause.started_at %>
+</p>
+
+<p>
+  <b>Ended at:</b>
+  <%= @pause.ended_at %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @pause.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_pause_path(@pause) %> |
+<%= link_to 'Back', pauses_path %>

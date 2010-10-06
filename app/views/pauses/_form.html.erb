@@ -1,0 +1,33 @@
+<%= form_for(@pause) do |f| %>
+  <% if @pause.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pause.errors.count, "error") %> prohibited this pause from being saved:</h2>
+
+      <ul>
+      <% @pause.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :invoice_item_service_id %><br />
+    <%= f.text_field :invoice_item_service_id %>
+  </div>
+  <div class="field">
+    <%= f.label :started_at %><br />
+    <%= f.datetime_select :started_at %>
+  </div>
+  <div class="field">
+    <%= f.label :ended_at %><br />
+    <%= f.datetime_select :ended_at %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

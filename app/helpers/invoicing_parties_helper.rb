@@ -1,0 +1,2 @@
+module InvoicingPartiesHelper
+end

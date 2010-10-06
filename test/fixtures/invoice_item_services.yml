@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  invoice_id: 1
+  hourly_wage: 
+  vat: 
+  description: MyString
+  started_at: 2010-10-06 19:40:06
+  ended_at: 2010-10-06 19:40:06
+
+two:
+  invoice_id: 1
+  hourly_wage: 
+  vat: 
+  description: MyString
+  started_at: 2010-10-06 19:40:06
+  ended_at: 2010-10-06 19:40:06

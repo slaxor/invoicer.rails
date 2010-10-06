@@ -1,0 +1,95 @@
+\documentclass[10pt,twoside,ngerman]{article}
+\usepackage{newcent}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{rotating}
+\usepackage[right]{eurosym}
+\geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=1cm,headheight=0cm,headsep=0cm,footskip=0cm}
+\pagestyle{empty}
+\setcounter{secnumdepth}{5}
+\usepackage{calc}
+
+\makeatletter
+\providecommand{\tabularnewline}{\\}
+
+\usepackage{babel}
+\makeatother
+\begin{document}
+%% \begin{sidewaystable}
+%% {\tiny Dieses Dokument wurde mit \LaTeX erstellt }
+%% \end{sidewaystable}
+%% \vspace{1cm}
+
+\begin{minipage}[t][1\totalheight]{1\columnwidth}%
+\label{sender address}<%= @invoice.incoicing_party.name %>
+
+<%= @invoice.incoicing_party.street %>
+
+<%= @invoice.incoicing_party.post_code %> <%= @invoice.incoicing_party.city %>%
+\end{minipage}%
+
+
+\vspace{4cm}
+
+
+%
+\begin{minipage}[t][20mm]{70mm}%
+\underbar{\tiny <%= @invoice.incoicing_party.name %> | <%= @invoice.incoicing_party.street %> | <%= @invoice.incoicing_party.post_code %> <%= @invoice.incoicing_party.city %>}{\tiny \par}
+
+\label{recipient address}<%= @customer.company %>
+
+<%= @customer.street %>\\
+
+\textbf{<%= @customer.postcode %> <%= @customer.town %>}
+\end{minipage}%
+\hfill{}<%= format_date(Date.today) %>
+
+\vspace{2cm}
+
+
+\textbf{\textsc{\huge Rechnung}}{\huge \par}
+Rechnungsnummer <%= "%i-%03i" % [@customer.id, @invoice.id] %>
+\vspace{2cm}
+
+
+\begin{tabular}{| l l l l r r |}
+Datum&
+Beschreibung&
+Anfang&
+Ende&
+Stunden&
+Preis\tabularnewline
+\hline
+<%sum=0%>
+<% @invoice_positions.each do |invoice_position| %>
+<% if multiday?(invoice_position.start,invoice_position.end) %>
+<%= format_date(invoice_position.start) %>
+<% else %>
+<%= "%02i-%s" % [invoice_position.start.day,format_date(invoice_position.end)] %>
+<%end%>&
+<%= invoice_position.description %>&
+<%= format_time(invoice_position.start) %>&
+<%= format_time(invoice_position.end) %>&
+<%= (invoice_position.end-invoice_position.start)/3600 %>&
+\EUR{<%= p=calculate_price(invoice_position);sum+=p;p.to_de2 %>}\tabularnewline
+<% end %>
+\hline
+\multicolumn{5}{r|}{Netto}&\EUR{<%= sum.to_de2 %>}\tabularnewline
+\multicolumn{5}{r|}{MwSt.<%= @invoice.vat %>\%}&\EUR{<%= vat=sum / 100 * @invoice.vat; vat.to_de2 %>}\tabularnewline
+\multicolumn{5}{r|}{Zu Zahlender Betrag}&\textbf{\EUR{<%= (sum + vat).to_de2 %>}}\tabularnewline
+\end{tabular}
+
+\vfill{}
+
+
+\hline{\normalsize}
+\vspace{0.2cm}
+{\tiny
+\begin{tabular*}{0.90\textwidth}{@{\extracolsep{\fill}} l l l }
+<%= @invoice.incoicing_party.name %>&<%= @invoice.incoicing_party.email %>&<%= @invoice.incoicing_party.bank_account_number %>\tabularnewline
+<%= @invoice.incoicing_party.street %>&<%= @invoice.incoicing_party.telephon %>&<%= @invoice.incoicing_party.bank_sort_code %>\tabularnewline
+<%= @invoice.incoicing_party.postcode %> <%= @invoice.incoicing_party.city %>&<%= @invoice.incoicing_party.vatid %>&<%= @invoice.incoicing_party.bank_name %>\tabularnewline
+\end{tabular}
+}
+\end{document}

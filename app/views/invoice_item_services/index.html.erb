@@ -1,0 +1,33 @@
+<h1>Listing invoice_item_services</h1>
+
+<table>
+  <tr>
+    <th>Invoice</th>
+    <th>Hourly wage</th>
+    <th>Vat</th>
+    <th>Description</th>
+    <th>Started at</th>
+    <th>Ended at</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @invoice_item_services.each do |invoice_item_service| %>
+  <tr>
+    <td><%= invoice_item_service.invoice_id %></td>
+    <td><%= invoice_item_service.hourly_wage %></td>
+    <td><%= invoice_item_service.vat %></td>
+    <td><%= invoice_item_service.description %></td>
+    <td><%= invoice_item_service.started_at %></td>
+    <td><%= invoice_item_service.ended_at %></td>
+    <td><%= link_to 'Show', invoice_item_service %></td>
+    <td><%= link_to 'Edit', edit_invoice_item_service_path(invoice_item_service) %></td>
+    <td><%= link_to 'Destroy', invoice_item_service, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Invoice item service', new_invoice_item_service_path %>

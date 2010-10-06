@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Invoice:</b>
+  <%= @invoice_item_service.invoice_id %>
+</p>
+
+<p>
+  <b>Hourly wage:</b>
+  <%= @invoice_item_service.hourly_wage %>
+</p>
+
+<p>
+  <b>Vat:</b>
+  <%= @invoice_item_service.vat %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @invoice_item_service.description %>
+</p>
+
+<p>
+  <b>Started at:</b>
+  <%= @invoice_item_service.started_at %>
+</p>
+
+<p>
+  <b>Ended at:</b>
+  <%= @invoice_item_service.ended_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_invoice_item_service_path(@invoice_item_service) %> |
+<%= link_to 'Back', invoice_item_services_path %>

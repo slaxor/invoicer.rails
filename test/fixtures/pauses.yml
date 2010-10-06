@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  invoice_item_service_id: 1
+  started_at: 2010-10-06 19:41:15
+  ended_at: 2010-10-06 19:41:15
+  description: MyString
+
+two:
+  invoice_item_service_id: 1
+  started_at: 2010-10-06 19:41:15
+  ended_at: 2010-10-06 19:41:15
+  description: MyString
