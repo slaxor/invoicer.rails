@@ -1,15 +1,15 @@
 InvoicerRails::Application.routes.draw do |map|
-  resources :invoicing_parties
 
-  resources :pauses
+  resources :invoices do
+    resources :invoice_item_services do
+      resources :pauses
+    end
+  end
 
-  resources :invoice_item_services
-
-  resources :invoices
-
-  resources :contacts
-
-  resources :customers
+  resources :customers do
+    resources :contacts
+    resources :invoicing_parties
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

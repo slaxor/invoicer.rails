@@ -21,13 +21,13 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # GET /invoices/new
-  # GET /invoices/new.xml
   def new
-    @invoice = Invoice.new
 
+    @invoice = Invoice.new
+    @customers = [['choose a customer',nil]] + Customer.all.map {|c| [c.name,c.id]}
+    @invoice.set_default_number
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @invoice }
     end
   end
@@ -35,6 +35,7 @@ class InvoicesController < ApplicationController
   # GET /invoices/1/edit
   def edit
     @invoice = Invoice.find(params[:id])
+    @customers = Customer.all.map {|c| [c.name,c.id]}
   end
 
   # POST /invoices
