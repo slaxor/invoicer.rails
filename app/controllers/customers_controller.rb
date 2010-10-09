@@ -1,6 +1,4 @@
 class CustomersController < ApplicationController
-  # GET /customers
-  # GET /customers.xml
   def index
     @customers = Customer.all
 
@@ -10,8 +8,6 @@ class CustomersController < ApplicationController
     end
   end
 
-  # GET /customers/1
-  # GET /customers/1.xml
   def show
     @customer = Customer.find(params[:id])
 
@@ -21,40 +17,33 @@ class CustomersController < ApplicationController
     end
   end
 
-  # GET /customers/new
-  # GET /customers/new.xml
   def new
     @customer = Customer.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => @customer }
     end
   end
 
-  # GET /customers/1/edit
   def edit
     @customer = Customer.find(params[:id])
   end
 
-  # POST /customers
-  # POST /customers.xml
   def create
     @customer = Customer.new(params[:customer])
 
     respond_to do |format|
       if @customer.save
         format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
-        format.xml  { render :xml => @customer, :status => :created, :location => @customer }
+        format.json  { render :json => @customer, :status => :created, :location => @customer }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @customer.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # PUT /customers/1
-  # PUT /customers/1.xml
   def update
     @customer = Customer.find(params[:id])
 
@@ -69,8 +58,6 @@ class CustomersController < ApplicationController
     end
   end
 
-  # DELETE /customers/1
-  # DELETE /customers/1.xml
   def destroy
     @customer = Customer.find(params[:id])
     @customer.destroy

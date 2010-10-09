@@ -1,6 +1,4 @@
 class InvoicesController < ApplicationController
-  # GET /invoices
-  # GET /invoices.xml
   def index
     @invoices = Invoice.all
 
@@ -10,52 +8,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # GET /invoices/1
-  # GET /invoices/1.xml
-  def show
-    @invoice = Invoice.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @invoice }
-    end
-  end
-
-  def new
-
-    @invoice = Invoice.new
-    @customers = [['choose a customer',nil]] + Customer.all.map {|c| [c.name,c.id]}
-    @invoice.set_default_number
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @invoice }
-    end
-  end
-
-  # GET /invoices/1/edit
-  def edit
-    @invoice = Invoice.find(params[:id])
-    @customers = Customer.all.map {|c| [c.name,c.id]}
-  end
-
-  # POST /invoices
-  # POST /invoices.xml
-  def create
-    @invoice = Invoice.new(params[:invoice])
-
-    respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to(@invoice, :notice => 'Invoice was successfully created.') }
-        format.xml  { render :xml => @invoice, :status => :created, :location => @invoice }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /invoices/1
-  # PUT /invoices/1.xml
   def update
     @invoice = Invoice.find(params[:id])
 
@@ -70,8 +22,6 @@ class InvoicesController < ApplicationController
     end
   end
 
-  # DELETE /invoices/1
-  # DELETE /invoices/1.xml
   def destroy
     @invoice = Invoice.find(params[:id])
     @invoice.destroy
@@ -80,5 +30,8 @@ class InvoicesController < ApplicationController
       format.html { redirect_to(invoices_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def print
   end
 end

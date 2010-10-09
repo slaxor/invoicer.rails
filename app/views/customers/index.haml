@@ -1,0 +1,11 @@
+%ul
+  - @customers.each do |c|
+    %li
+      = "#{c.name} (#{c.number})"
+  %li
+    %label{:for => 'customer[name]'}Name
+    %input{:type => :text, :name => 'customer[name]'}
+      %label{:for => 'customer[number]'}Number
+    %input{:type => :text, :name => 'customer[number]'}
+    %button#create-customer Create a new customer
+= link_to 'new', new_customer_path
