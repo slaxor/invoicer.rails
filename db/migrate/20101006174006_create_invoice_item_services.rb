@@ -7,7 +7,6 @@ class CreateInvoiceItemServices < ActiveRecord::Migration
       t.string :description
       t.datetime :started_at
       t.datetime :ended_at
-
       t.timestamps
     end
   end

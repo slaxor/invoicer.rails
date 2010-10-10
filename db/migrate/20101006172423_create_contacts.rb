@@ -7,7 +7,9 @@ class CreateContacts < ActiveRecord::Migration
       t.string :telephone
       t.string :street
       t.string :post_code
-
+      t.string :city
+      t.string :country
+      t.string :kind
       t.timestamps
     end
   end

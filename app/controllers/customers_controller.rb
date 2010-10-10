@@ -31,17 +31,18 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.new(params[:customer])
-
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
-        format.json  { render :json => @customer, :status => :created, :location => @customer }
-      else
-        format.html { render :action => "new" }
-        format.json  { render :json => @customer.errors, :status => :unprocessable_entity }
-      end
-    end
+    debugger
+    @customer = Customer.create(params[:customer])
+    render :json => @customer, :status => :created, :location => @customer
+    #respond_to do |format|
+      #if @customer.save
+        #format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
+        #format.json  { render :json => @customer, :status => :created, :location => @customer }
+      #else
+        #format.html { render :action => "new" }
+        #format.json  { render :json => @customer.errors, :status => :unprocessable_entity }
+      #end
+    #end
   end
 
   def update
@@ -61,10 +62,10 @@ class CustomersController < ApplicationController
   def destroy
     @customer = Customer.find(params[:id])
     @customer.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(customers_url) }
-      format.xml  { head :ok }
-    end
+    head :ok
+    #respond_to do |format|
+      #format.html { redirect_to(customers_url) }
+      #format.xml  { head :ok }
+    #end
   end
 end

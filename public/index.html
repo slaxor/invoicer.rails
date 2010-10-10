@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link href="/stylesheets/jquery-ui-1.8.5.custom.css?1286408869" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/scaffold.css?1286647083" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/javascripts/jquery-1.4.2.min.js?1267130934" type="text/javascript"></script>
+    <script src="/javascripts/jquery-ui-1.8.5.custom.min.js?1286376050" type="text/javascript"></script>
+
+    <script src="/javascripts/pages/customers.js?1286494686" type="text/javascript"></script>
+    <script src="/javascripts/pages/invoices.js?1286412924" type="text/javascript"></script>
+    <meta name="csrf-param" content="authenticity_token"/>
+    <meta name="csrf-token" content="VoHvjkYNyXg2xUnnfpHQmUSTS0wHTNKaPGULEQ0SOvQ="/>
+  </head>
+  <body>
+    <form action="/user_session" method="post">
+      <label for="login">Username:</label><input name="login" type="text" />
+      <label for="password">Password:</label><input name="password" type="password" />
+      <input name="submit" type="submit" />
+    </form>
+  </body>
+</html>
+

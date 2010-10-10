@@ -1,0 +1,16 @@
+%h3
+  You are
+  = @user.login
+  [
+  = @user.email
+  ]
+
+%h4 Your customers:
+#customers= render :partial => '/customers/list', :locals => {:customers => @user.customers}
+
+%h4 Your invoicing identities:
+#invoicing_parties
+
+%h4 Your invoices:
+#invoices
+

@@ -5,7 +5,6 @@ class CreatePauses < ActiveRecord::Migration
       t.datetime :started_at
       t.datetime :ended_at
       t.string :description
-
       t.timestamps
     end
   end
