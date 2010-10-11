@@ -13,4 +13,8 @@ class ServiceInvoiceItem < ActiveRecord::Base
   def gross_price
     price + price * vat
   end
+
+  def pauses
+    pauses.map {|pause| [pause.started_at, pause.ended_at] }
+  end
 end

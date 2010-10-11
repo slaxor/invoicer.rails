@@ -1,0 +1,21 @@
+%h1 register
+
+- form_for @user do |f|
+  = f.error_messages
+  %label{:for => :login} login
+  %br/
+  = f.text_field :login
+  %br/
+  %label{:for => :email} email
+  %br/
+  = f.text_field :email
+  %br/
+  %label{:for => :password} password
+  %br/
+  = f.password_field :password
+  %br/
+  %label{:for =>  :password_confirmation} password (again)
+  %br/
+  = f.password_field :password_confirmation
+  %br/
+  = f.submit "Register"

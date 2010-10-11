@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101010205748) do
+ActiveRecord::Schema.define(:version => 20101009173728) do
 
   create_table "contacts", :force => true do |t|
     t.integer  "customer_id"
@@ -26,8 +26,6 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
     t.datetime "updated_at"
   end
 
-  add_index "contacts", ["customer_id"], :name => "fk_contacts_customer_id"
-
   create_table "customers", :force => true do |t|
     t.string   "name"
     t.string   "number"
@@ -39,22 +37,6 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
     t.datetime "updated_at"
   end
 
-  add_index "customers", ["user_id"], :name => "fk_customers_user_id"
-
-  create_table "invoice_item_services", :force => true do |t|
-    t.integer  "invoice_id"
-    t.decimal  "hourly_wage", :precision => 10, :scale => 5
-    t.string   "currency"
-    t.decimal  "vat",         :precision => 10, :scale => 10
-    t.string   "description"
-    t.datetime "started_at"
-    t.datetime "ended_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "invoice_item_services", ["invoice_id"], :name => "fk_invoice_item_services_invoice_id"
-
   create_table "invoices", :force => true do |t|
     t.integer  "contact_id",                            :null => false
     t.string   "number",                                :null => false
@@ -65,9 +47,6 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "invoices", ["contact_id"], :name => "fk_invoices_contact_id"
-  add_index "invoices", ["invoicing_party_id"], :name => "fk_invoices_invoicing_party_id"
 
   create_table "invoicing_parties", :force => true do |t|
     t.string   "name"
@@ -89,10 +68,8 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
     t.datetime "updated_at"
   end
 
-  add_index "invoicing_parties", ["user_id"], :name => "fk_invoicing_parties_user_id"
-
   create_table "pauses", :force => true do |t|
-    t.integer  "invoice_item_service_id"
+    t.integer  "service_invoice_item_id"
     t.datetime "started_at"
     t.datetime "ended_at"
     t.string   "description"
@@ -100,7 +77,17 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
     t.datetime "updated_at"
   end
 
-  add_index "pauses", ["invoice_item_service_id"], :name => "fk_pauses_invoice_item_service_id"
+  create_table "service_invoice_items", :force => true do |t|
+    t.integer  "invoice_id"
+    t.decimal  "hourly_wage", :precision => 10, :scale => 5
+    t.string   "currency"
+    t.decimal  "vat",         :precision => 10, :scale => 10
+    t.string   "description"
+    t.datetime "started_at"
+    t.datetime "ended_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "login",                              :null => false

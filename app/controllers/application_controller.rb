@@ -42,5 +42,9 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
+
+    def account_url
+      user_path(@user_session.user)
+    end
 end
 

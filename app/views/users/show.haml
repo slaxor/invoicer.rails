@@ -4,7 +4,7 @@
   [
   = @user.email
   ]
-
+#logout= link_to 'logout', user_session_path(@user), :method => :delete
 %h4 Your customers:
 #customers= render :partial => '/customers/list', :locals => {:customers => @user.customers}
 
