@@ -30,8 +30,11 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
-    t.integer  "number"
+    t.string   "number"
     t.integer  "user_id"
+    t.decimal  "default_hourly_wage", :precision => 10, :scale => 10
+    t.string   "default_currency",                                    :default => "\342\202\254"
+    t.decimal  "default_vat_rate",    :precision => 10, :scale => 10, :default => 0.19
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -40,8 +43,9 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
 
   create_table "invoice_item_services", :force => true do |t|
     t.integer  "invoice_id"
-    t.decimal  "hourly_wage", :precision => 10, :scale => 0
-    t.decimal  "vat",         :precision => 10, :scale => 0
+    t.decimal  "hourly_wage", :precision => 10, :scale => 5
+    t.string   "currency"
+    t.decimal  "vat",         :precision => 10, :scale => 10
     t.string   "description"
     t.datetime "started_at"
     t.datetime "ended_at"
@@ -52,10 +56,9 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
   add_index "invoice_item_services", ["invoice_id"], :name => "fk_invoice_item_services_invoice_id"
 
   create_table "invoices", :force => true do |t|
-    t.integer  "customer_id",                           :null => false
-    t.integer  "number",                                :null => false
-    t.text     "covering_text"
     t.integer  "contact_id",                            :null => false
+    t.string   "number",                                :null => false
+    t.text     "covering_text"
     t.integer  "invoicing_party_id",                    :null => false
     t.boolean  "paid",               :default => false
     t.date     "due_on"
@@ -64,7 +67,6 @@ ActiveRecord::Schema.define(:version => 20101010205748) do
   end
 
   add_index "invoices", ["contact_id"], :name => "fk_invoices_contact_id"
-  add_index "invoices", ["customer_id"], :name => "fk_invoices_customer_id"
   add_index "invoices", ["invoicing_party_id"], :name => "fk_invoices_invoicing_party_id"
 
   create_table "invoicing_parties", :force => true do |t|

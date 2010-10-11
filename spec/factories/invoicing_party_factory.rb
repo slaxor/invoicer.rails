@@ -4,7 +4,7 @@ Factory.define :random_invoicing_party, :class => InvoicingParty do |f|
   f.co_line
   f.email { Faker::Internet.email }
   f.telephone { Faker::PhoneNumber.phone_number }
-  f.street { Faker::Address.street }
+  f.street { Faker::Address.street_address }
   f.post_code { Faker::Address.zip_code }
   f.city { Faker::Address.city }
   f.vatid { "DE #{rand(10**10)}" }

@@ -1,2 +1,0 @@
-module InvoiceItemServicesHelper
-end

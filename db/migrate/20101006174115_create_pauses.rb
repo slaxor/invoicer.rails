@@ -1,7 +1,7 @@
 class CreatePauses < ActiveRecord::Migration
   def self.up
     create_table :pauses do |t|
-      t.integer :invoice_item_service_id
+      t.integer :service_invoice_item_id
       t.datetime :started_at
       t.datetime :ended_at
       t.string :description

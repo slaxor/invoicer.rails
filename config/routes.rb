@@ -1,6 +1,6 @@
 InvoicerRails::Application.routes.draw do |map|
 
-  #map.root :controller => "user_sessions", :action => "new"
+  map.root :controller => "user_sessions", :action => "new"
   map.resource :user_session
 
   resources :users do
@@ -8,7 +8,7 @@ InvoicerRails::Application.routes.draw do |map|
       member do
         get :print
       end
-      resources :invoice_item_services
+      resources :service_invoice_items
     end
 
     resources :customers do

@@ -9,8 +9,8 @@ test:
   <<: *dev
   database: invoicer_test
 
-
 production:
+  <<: *dev
   database: invoicer_production
 
 

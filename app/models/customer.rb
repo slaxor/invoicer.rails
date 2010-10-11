@@ -1,6 +1,7 @@
 class Customer < ActiveRecord::Base
-  has_many :contacts
-  has_many :invoices
+  belongs_to :user
+  has_many :contacts, :dependent => :delete_all
   validates_uniqueness_of :name
-  validates_uniqueness_of :number #TODO Scoping user-modell oder so
+  validates_uniqueness_of :number, :scope => :user_id
 end
+
