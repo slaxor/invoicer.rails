@@ -15,6 +15,6 @@ class ServiceInvoiceItem < ActiveRecord::Base
   end
 
   def pauses
-    pauses.map {|pause| [pause.started_at, pause.ended_at] }
+    'pauses.map {|pause| [pause.started_at, pause.ended_at] }'
   end
 end

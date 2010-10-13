@@ -32,6 +32,12 @@ class InvoicesController < ApplicationController
     end
   end
 
-  def print
+  def show
+    @invoice = Invoice.find(params[:id])
+    Mime::Type.register('text/plain', :tex)
+    respond_to do |format|
+      format.html
+      format.tex { render :tex => 'show', :layout => "ewqefalse" }
+    end
   end
 end

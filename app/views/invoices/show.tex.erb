@@ -26,7 +26,7 @@
 
 <%= @invoice.invoicing_party.street %>
 
-<%= @invoice.invoicing_party.post_code %> <%= @invoice.incvoicing_party.city %>%
+<%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>%
 \end{minipage}%
 
 
@@ -37,19 +37,19 @@
 \begin{minipage}[t][20mm]{70mm}%
 \underbar{\tiny <%= @invoice.invoicing_party.name %> | <%= @invoice.invoicing_party.street %> | <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>}{\tiny \par}
 
-\label{recipient address}<%= @customer.company %>
+\label{recipient address}<%= @invoice.customer.name %>
 
-<%= @customer.street %>\\
+<%= @invoice.customer.contacts[0].street %>\\
 
-\textbf{<%= @customer.postcode %> <%= @customer.town %>}
+\textbf{<%= @invoice.customer.contacts[0].post_code %> <%= @invoice.customer.contacts[0].city %>}
 \end{minipage}%
-\hfill{}<%= format_date(Date.today) %>
+\hfill{}<%= Date.today %>
 
 \vspace{2cm}
 
 
 \textbf{\textsc{\huge Rechnung}}{\huge \par}
-Rechnungsnummer <%= "%i-%03i" % [@customer.id, @invoice.id] %>
+Rechnungsnummer <%= "#{@invoice.customer.number}-#{@invoice.number}" %>
 \vspace{2cm}
 
 
@@ -64,8 +64,9 @@ Mwst&
 Preis (Brutto)\tabularnewline
 \hline
 <%- sum_hours = 0 -%>
-<%- sum_gross_price = 0 -%>
+<%- sum_price = 0 -%>
 <%- sum_vat = 0 -%>
+<%- sum_gross_price = 0 -%>
 
 <%- @invoice.service_invoice_items.each do |invoice_item| -%>
   <%- hours = invoice_item.ended_at - invoice_item.started_at -%>&
@@ -91,13 +92,21 @@ Preis (Brutto)\tabularnewline
 \vfill{}
 
 
-\hline{\normalsize}
-\vspace{0.2cm}
-{\tiny
-\begin{tabular*}{0.90\textwidth}{@{\extracolsep{\fill}} l l l }
-<%= @invoice.invoicing_party.name %>&<%= @invoice.invoicing_party.email %>&<%= @invoice.invoicing_party.bank_account_number %>\tabularnewline
-<%= @invoice.invoicing_party.street %>&<%= @invoice.invoicing_party.telephon %>&<%= @invoice.invoicing_party.bank_sort_code %>\tabularnewline
-<%= @invoice.invoicing_party.postcode %> <%= @invoice.invoicing_party.city %>&<%= @invoice.invoicing_party.vatid %>&<%= @invoice.invoicing_party.bank_name %>\tabularnewline
+\begin{tabular}{>{\raggedright}p{0.25\paperwidth}|>{\raggedright}p{0.25\paperwidth}|>{\raggedright}p{0.25\paperwidth}}
+\hline
+{\tiny <%= @invoice.invoicing_party.name %>}{\tiny \par}
+{\tiny <%= @invoice.invoicing_party.street %>}{\tiny \par}
+{\tiny <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>}{\tiny \par}
+
+& {\tiny <%= @invoice.invoicing_party.email %>}{\tiny \par}
+{\tiny <%= @invoice.invoicing_party.telephone %>}{\tiny \par}
+{\tiny <%= @invoice.invoicing_party.vatid %>}
+
+& {\tiny <%= @invoice.invoicing_party.bank_account_number %>}{\tiny \par}
+{\tiny <%= @invoice.invoicing_party.bank_sort_code %>}{\tiny \par}
+{\tiny <%= @invoice.invoicing_party.bank %>}\tabularnewline
 \end{tabular}
-}
+
+{\tiny Dieses Dokument wurde mit \LaTeX erstellt}
 \end{document}
+
