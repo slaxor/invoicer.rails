@@ -31,7 +31,6 @@ class CustomersController < ApplicationController
   end
 
   def create
-    debugger
     @customer = Customer.create(params[:customer])
     render :json => @customer, :status => :created, :location => @customer
     #respond_to do |format|

@@ -1,12 +1,12 @@
 set :application, "invoicer.rails"
 set :repository,  "git://github.com/slaxor/invoicer.rails.git"
 set :scm, :git
-role :web, "127.0.0.1"                          # Your HTTP server, Apache/etc
-role :app, "127.0.0.1"                          # This may be the same as your `Web` server
-role :db,  "127.0.0.1", :primary => true # This is where Rails migrations will run
+role :web, "127.0.0.1", :primary=>true
+role :app, "127.0.0.1", :primary=>true
+role :db,  "127.0.0.1", :primary=>true
 set :deploy_to, File.join("", "opt", application)
 set :local_shared_files, %w(config/database.yml)
-set :local_shared_dirs, %w(log tmp)
+set :local_shared_dirs, %w(log)
 set :use_sudo, false
 ssh_options[:username] = ENV['USER']
 
