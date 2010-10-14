@@ -38,10 +38,5 @@ $(document).ready(function() {
       }
     });
   });
-
-  $.flash = function(message) {
-    var flash = $('body').before('<div id="flash"></div>');
-    $('#flash').after(message + '<br/>');
-  };
-
 })
+

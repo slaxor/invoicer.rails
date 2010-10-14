@@ -1,0 +1,94 @@
+%h4 Your invoice identities:
+%ul
+  = invoicing_parties.each do |invoicing_party|
+    %li{:id => "invoicing-party-#{invoicing_party.id}", :class => 'invoicing_party'}
+      = invoicing_party.name
+      .hidden
+        co line:
+        =invoicing_party.co_line
+        %br/
+        street:
+        =invoicing_party.street
+        %br/
+        post code:
+        =invoicing_party.post_code
+        %br/
+        city:
+        =invoicing_party.city
+        %br/
+        country:
+        =invoicing_party.country
+        %br/
+        vatid:
+        =invoicing_party.vatid
+        %br/
+        taxnumber:
+        =invoicing_party.taxnumber
+        %br/
+        currency:
+        =invoicing_party.currency
+        %br/
+        bank:
+        =invoicing_party.bank
+        %br/
+        bank account number:
+        =invoicing_party.bank_account_number
+        %br/
+        bank sort code:
+        =invoicing_party.bank_sort_code
+        %br/
+        telephone:
+        =invoicing_party.telephone
+        %br/
+        email:
+        =invoicing_party.email
+        %br/
+  %li#invoicing-party-new
+    %label[:for => 'invoicing_party[name]'] name
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[name]'}
+    %br/
+    %label[:for => 'invoicing_party[co_line]'] co_line
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[co_line]'}
+    %br/
+    %label[:for => 'invoicing_party[street]'] street
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[street]'}
+    %br/
+    %label[:for => 'invoicing_party[post_code]'] post_code
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[post_code]'}
+    %br/
+    %label[:for => 'invoicing_party[city]'] city
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[city]'}
+    %br/
+    %label[:for => 'invoicing_party[country]'] country
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[country]'}
+    %br/
+    %label[:for => 'invoicing_party[vatid]'] vatid
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[vatid]'}
+    %br/
+    %label[:for => 'invoicing_party[taxnumber]'] taxnumber
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[taxnumber]'}
+    %br/
+    %label[:for => 'invoicing_party[currency]'] currency
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[currency]'}
+    %br/
+    %label[:for => 'invoicing_party[bank]'] bank
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[bank]'}
+    %br/
+    %label[:for => 'invoicing_party[bank_account_number]'] bank_account_number
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[bank_account_number]'}
+    %br/
+    %label[:for => 'invoicing_party[bank_sort_code]'] bank_sort_code
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[bank_sort_code]'}
+    %br/
+    %label[:for => 'invoicing_party[telephone]'] telephone
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[telephone]'}
+    %br/
+    %label[:for => 'invoicing_party[email]'] email
+    %input{:class => 'invoicing_party-form', :name => 'invoicing_party[email]'}
+    %br/
+    %button#create-invoicing_party create invoicing party
+
+
+
+
+

@@ -1,6 +1,6 @@
 class ServiceInvoiceItem < ActiveRecord::Base
   belongs_to :invoice
-  has_many :pauses
+  has_many :pauses, :dependent => :delete_all
 
   def hours
     ended_at - started_at

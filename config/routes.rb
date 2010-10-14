@@ -4,16 +4,16 @@ InvoicerRails::Application.routes.draw do |map|
   map.resource :user_session
 
   resources :users do
-    resources :invoices do
-      member do
-        get :print
-      end
-      resources :service_invoice_items
-    end
+    resources :invoicing_parties
 
-    resources :customers do
-      resources :contacts
-      resources :invoicing_parties
+     resources :customers do
+       resources :contacts
+       resources :invoices do
+         member do
+           get :print
+         end
+         resources :service_invoice_items
+     end
     end
   end
   # The priority is based upon order of creation:

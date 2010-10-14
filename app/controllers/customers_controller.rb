@@ -1,70 +1,21 @@
 class CustomersController < ApplicationController
-  def index
-    @customers = Customer.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @customers }
-    end
+   def index
+    render :json => @current_user.customers
   end
 
   def show
-    @customer = Customer.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @customer }
-    end
-  end
-
-  def new
-    @customer = Customer.new
-
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => @customer }
-    end
-  end
-
-  def edit
-    @customer = Customer.find(params[:id])
+    render :json => @current_user.customers.find(params[:id])
   end
 
   def create
-    @customer = Customer.create(params[:customer])
-    render :json => @customer, :status => :created, :location => @customer
-    #respond_to do |format|
-      #if @customer.save
-        #format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
-        #format.json  { render :json => @customer, :status => :created, :location => @customer }
-      #else
-        #format.html { render :action => "new" }
-        #format.json  { render :json => @customer.errors, :status => :unprocessable_entity }
-      #end
-    #end
+    render :json => @current_user.customers << Customer.create(params[:customers])
   end
 
   def update
-    @customer = Customer.find(params[:id])
-
-    respond_to do |format|
-      if @customer.update_attributes(params[:customer])
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @customer.errors, :status => :unprocessable_entity }
-      end
-    end
+    render :json => @current_user.customers.update(params[:id], params[:customers])
   end
 
   def destroy
-    @customer = Customer.find(params[:id])
-    @customer.destroy
-    head :ok
-    #respond_to do |format|
-      #format.html { redirect_to(customers_url) }
-      #format.xml  { head :ok }
-    #end
+    render :json => @current_user.customers.destroy(params[:id])
   end
 end
