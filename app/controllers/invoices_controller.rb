@@ -1,43 +1,26 @@
 class InvoicesController < ApplicationController
   def index
-    @invoices = Invoice.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @invoices }
-    end
-  end
-
-  def update
-    @invoice = Invoice.find(params[:id])
-
-    respond_to do |format|
-      if @invoice.update_attributes(params[:invoice])
-        format.html { redirect_to(@invoice, :notice => 'Invoice was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @invoice.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @invoice = Invoice.find(params[:id])
-    @invoice.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(invoices_url) }
-      format.xml  { head :ok }
-    end
+    render :json => @current_user.customer.find(params[:customer_id]/invoices
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
-    Mime::Type.register('text/plain', :tex)
     respond_to do |format|
-      format.html
-      format.tex { render :tex => 'show', :layout => "ewqefalse" }
+      format.json { render :json => @current_user.customer.find(params[:customer_id]/invoices.find(params[:id])}
+      format.tex {
+        @invoice = @current_user.customer.find(params[:customer_id]/invoices.find(params[:id])
+      }
     end
+  end
+
+  def create
+    render :json => @current_user.customer.find(params[:customer_id]/invoices << Contact.create(params[:customer.find(params[:invoice])
+  end
+
+  def update
+    render :json => @current_user.customer.find(params[:customer_id]/invoices.update(params[:id], params[:id], params[:invoice])
+  end
+
+  def destroy
+    render :json => @current_user.customer.find(params[:customer_id]/invoices.destroy(params[:id])
   end
 end
