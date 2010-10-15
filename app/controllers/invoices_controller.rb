@@ -9,10 +9,11 @@ class InvoicesController < ApplicationController
       format.json { render :json => @invoice }
       format.tex do
         @invoice.update_attribute(:printed_at, Time.now) unless @invoice.printed_at
+        headers['Content-Disposition'] = %Q(attachment; filename="#{@invoice.number}_#{Time.now.to_s(:number)}.tex")
       end
       format.pdf do
         @invoice.update_attribute(:printed_at, Time.now) unless @invoice.printed_at
-        headers['Content-Disposition'] = %Q(attachment; filename="#{@invoice.number}_#{Time.now.to_s(:stamp)}.pdf")
+        headers['Content-Disposition'] = %Q(attachment; filename="#{@invoice.number}_#{Time.now.to_s(:number)}.pdf")
         render :text => File.read('/bin/sh')
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101014182734) do
+ActiveRecord::Schema.define(:version => 20101015011000) do
 
   create_table "contacts", :force => true do |t|
     t.integer  "customer_id"
@@ -80,9 +80,11 @@ ActiveRecord::Schema.define(:version => 20101014182734) do
 
   create_table "service_invoice_items", :force => true do |t|
     t.integer  "invoice_id"
-    t.decimal  "hourly_wage", :precision => 10, :scale => 5
-    t.string   "currency"
-    t.decimal  "vat",         :precision => 10, :scale => 10
+    t.decimal  "price",            :precision => 10, :scale => 5
+    t.string   "pricing_unit"
+    t.string   "pricing_strategy",                                 :default => "hourly"
+    t.string   "currency",                                         :default => "\342\202\254"
+    t.decimal  "vat_rate",         :precision => 10, :scale => 10, :default => 0.19
     t.string   "description"
     t.datetime "started_at"
     t.datetime "ended_at"

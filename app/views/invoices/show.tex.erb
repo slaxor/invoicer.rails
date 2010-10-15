@@ -63,7 +63,7 @@
 
 
 \textbf{\textsc{\huge Rechnung}}{\huge \par}
-Rechnungsnummer <%= "#{@invoice.customer.number}-#{@invoice.number}" %>
+Rechnungsnummer <%= @invoice.number %>
 \vspace{2cm}
 
 
@@ -85,42 +85,36 @@ Preis (Brutto)\tabularnewline
 <%- @invoice.service_invoice_items.each do |invoice_item| -%>
   <%- hours = invoice_item.ended_at - invoice_item.started_at -%>
   <%- sum_hours += hours -%>
-  <%= invoice_item.started_at %>&
-  <%= invoice_item.ended_at %>&
-  <%= invoice_item.pauses %>&
+  <%= invoice_item.started_at.to_s(:medium) %>&
+  <%= invoice_item.ended_at.to_s(:medium) %>&
+  <%= invoice_item.pause_times %>&
   <%= invoice_item.description %>&
   <%= hours = invoice_item.ended_at - invoice_item.started_at %>&
-  <%= price = invoice_item.hourly_wage * hours %>&
+  <%= price = invoice_item.pricing %>&
   <%- sum_price += price -%>
-  <%= vat = invoice_item.hourly_wage * hours * invoice_item.vat_rate %> (<%= invoice_item.vat_rate * 100 %>\%)&
+  <%= vat = invoice_item.pricing * invoice_item.vat_rate %> (<%= invoice_item.vat_rate * 100 %>\%)&
   <%- sum_vat += vat -%>
   <%= gross_price = price + vat %>\tabularnewline
   <%- sum_gross_price += gross_price -%>
 <%- end -%>
 \hline
-\multicolumn{8}{r|}{Netto<%= sum_price %>\EUR}\tabularnewline
+\multicolumn{8}{r|}{Netto <%= sum_price %>\EUR}\tabularnewline
 \multicolumn{8}{r|}{<%= sum_vat %>\EUR}\tabularnewline
-\multicolumn{8}{r||}{Zu Zahlender Betrag \textbf{<%= (sum_gross_price) %>\EUR}}\tabularnewline
+\multicolumn{8}{r|}{\textbf{Zu Zahlender Betrag <%= (sum_gross_price) %>\EUR}}\tabularnewline
 \end{tabular}
-
 \vfill{}
-
-
 \begin{tabular}{>{\raggedright}p{0.25\paperwidth}|>{\raggedright}p{0.25\paperwidth}|>{\raggedright}p{0.25\paperwidth}}
 \hline
 {\tiny <%= @invoice.invoicing_party.name %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.street %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>}{\tiny \par}
-
 & {\tiny <%= @invoice.invoicing_party.email %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.telephone %>}{\tiny \par}
 {\tiny USt-IdNr. <%= @invoice.invoicing_party.vatid %>}
-
 & {\tiny <%= @invoice.invoicing_party.bank_account_number %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.bank_sort_code %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.bank %>}\tabularnewline
 \end{tabular}
-
 {\tiny Dieses Dokument wurde mit \LaTeX erstellt}
 \end{document}
 

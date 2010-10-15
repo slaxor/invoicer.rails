@@ -8,7 +8,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 Time::DATE_FORMATS[:german_date] = '%d.%m.%Y'
 Time::DATE_FORMATS[:month_stamp] = '%Y%m'
-Time::DATE_FORMATS[:stamp] = '%Y%m%d%H%M%S'
+Time::DATE_FORMATS[:medium] = '%d.%m.%Y %H:%M'
 Mime::Type.register("text/plain", :tex)
 Mime::Type.register("application/pdf", :pdf)
 

@@ -6,15 +6,20 @@ class ServiceInvoiceItem < ActiveRecord::Base
     ended_at - started_at
   end
 
-  def price
-    hours * hourly_wage
-  end
-
   def gross_price
     price + price * vat
   end
 
-  def pauses
-    'pauses.map {|pause| [pause.started_at, pause.ended_at] }'
+  def pricing
+    case pricing_strategy
+    when 'fixed'
+      price
+    else
+      raise 'ImplementationWorkToDo'
+    end
+  end
+
+  def pause_times
+    pauses.map(&:to_time).join(', ')
   end
 end
