@@ -6,6 +6,12 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
+Time::DATE_FORMATS[:german_date] = '%d.%m.%Y'
+Time::DATE_FORMATS[:month_stamp] = '%Y%m'
+Time::DATE_FORMATS[:stamp] = '%Y%m%d%H%M%S'
+Mime::Type.register("text/plain", :tex)
+Mime::Type.register("application/pdf", :pdf)
+
 module InvoicerRails
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

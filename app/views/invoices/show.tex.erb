@@ -1,25 +1,39 @@
 \documentclass[10pt,twoside,ngerman]{article}
 \usepackage{newcent}
+\renewcommand{\ttdefault}{newcent}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{geometry}
-\usepackage{rotating}
-\usepackage[right]{eurosym}
-\geometry{verbose,a4paper,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=1cm,headheight=0cm,headsep=0cm,footskip=0cm}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=1cm,headheight=0cm,headsep=0cm,footskip=0cm}
 \pagestyle{empty}
 \setcounter{secnumdepth}{5}
+\usepackage{array}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage{newcent}\usepackage{rotating}\usepackage[right]{eurosym}
+
+
 \usepackage{calc}
 
 \makeatletter
 \providecommand{\tabularnewline}{\\}
 
+\usepackage{babel}\makeatother
+
+
+\makeatother
+
 \usepackage{babel}
 \makeatother
 \begin{document}
-%% \begin{sidewaystable}
-%% {\tiny Dieses Dokument wurde mit \LaTeX erstellt }
-%% \end{sidewaystable}
-%% \vspace{1cm}
+\vspace{1cm}
 
 \begin{minipage}[t][1\totalheight]{1\columnwidth}%
 \label{sender address}<%= @invoice.invoicing_party.name %>
@@ -37,13 +51,13 @@
 \begin{minipage}[t][20mm]{70mm}%
 \underbar{\tiny <%= @invoice.invoicing_party.name %> | <%= @invoice.invoicing_party.street %> | <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>}{\tiny \par}
 
-\label{recipient address}<%= @invoice.customer.name %>
+\label{recipient address}<%= @invoice.contact.name %>
 
-<%= @invoice.customer.contacts[0].street %>\\
+<%= @invoice.contact.street %>\\
 
-\textbf{<%= @invoice.customer.contacts[0].post_code %> <%= @invoice.customer.contacts[0].city %>}
+\textbf{<%= @invoice.contact.post_code %> <%= @invoice.contact.city %>}
 \end{minipage}%
-\hfill{}<%= Date.today %>
+\hfill{}<%= @invoice.invoicing_party.city %>, <%= @invoice.printed_at.to_s(:german_date) %>
 
 \vspace{2cm}
 
@@ -53,7 +67,7 @@ Rechnungsnummer <%= "#{@invoice.customer.number}-#{@invoice.number}" %>
 \vspace{2cm}
 
 
-\begin{tabular}{| l l l r r r r |}
+\begin{tabular}{|l|l|l|l|r|r|r|r|}
 Anfang&
 Ende&
 Pausen&
@@ -69,8 +83,8 @@ Preis (Brutto)\tabularnewline
 <%- sum_gross_price = 0 -%>
 
 <%- @invoice.service_invoice_items.each do |invoice_item| -%>
-  <%- hours = invoice_item.ended_at - invoice_item.started_at -%>&
-  <%- sum_hours += hours -%>&
+  <%- hours = invoice_item.ended_at - invoice_item.started_at -%>
+  <%- sum_hours += hours -%>
   <%= invoice_item.started_at %>&
   <%= invoice_item.ended_at %>&
   <%= invoice_item.pauses %>&
@@ -78,15 +92,15 @@ Preis (Brutto)\tabularnewline
   <%= hours = invoice_item.ended_at - invoice_item.started_at %>&
   <%= price = invoice_item.hourly_wage * hours %>&
   <%- sum_price += price -%>
-  <%= vat = invoice_item.hourly_wage * hours * invoice_item.vat_rate %> (<%= invoice_item.vat_rate * 100 %>\%)
+  <%= vat = invoice_item.hourly_wage * hours * invoice_item.vat_rate %> (<%= invoice_item.vat_rate * 100 %>\%)&
   <%- sum_vat += vat -%>
-  <%= gross_price = price + vat %>&
-  <%- sum_gross_price += gross_price -%>\tabularnewline
-<%end%>&
+  <%= gross_price = price + vat %>\tabularnewline
+  <%- sum_gross_price += gross_price -%>
+<%- end -%>
 \hline
-\multicolumn{6}{r|}{Netto}&{<%= sum_price %>\EUR}\tabularnewline
-\multicolumn{6}{r|}&\EUR{<%= sum_vat %>}\tabularnewline
-\multicolumn{6}{r|}{Zu Zahlender Betrag}&\textbf{{<%= (sum_gross_price) %>\EUR}\tabularnewline
+\multicolumn{8}{r|}{Netto<%= sum_price %>\EUR}\tabularnewline
+\multicolumn{8}{r|}{<%= sum_vat %>\EUR}\tabularnewline
+\multicolumn{8}{r||}{Zu Zahlender Betrag \textbf{<%= (sum_gross_price) %>\EUR}}\tabularnewline
 \end{tabular}
 
 \vfill{}
@@ -100,7 +114,7 @@ Preis (Brutto)\tabularnewline
 
 & {\tiny <%= @invoice.invoicing_party.email %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.telephone %>}{\tiny \par}
-{\tiny <%= @invoice.invoicing_party.vatid %>}
+{\tiny USt-IdNr. <%= @invoice.invoicing_party.vatid %>}
 
 & {\tiny <%= @invoice.invoicing_party.bank_account_number %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.bank_sort_code %>}{\tiny \par}
