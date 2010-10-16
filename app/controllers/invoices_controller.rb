@@ -12,9 +12,7 @@ class InvoicesController < ApplicationController
         headers['Content-Disposition'] = %Q(attachment; filename="#{@invoice.number}.tex")
       end
       format.pdf do
-        @invoice.update_attribute(:printed_at, Time.now) unless @invoice.printed_at
-        headers['Content-Disposition'] = %Q(attachment; filename="#{@invoice.number}.pdf")
-        render :text => File.read('/bin/sh')
+        prawnto :filename => "invoice_#{@invoice.customer.name}_#{@invoice.number}.pdf"
       end
     end
   end

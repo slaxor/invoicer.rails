@@ -29,7 +29,7 @@ gem 'ruby-debug'
 #   gem 'webrat'
 # end
 gem 'haml'
-gem 'rtex'
+gem 'prawn'
 
 group :test do
   gem 'shoulda'

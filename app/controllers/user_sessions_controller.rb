@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  skip_before_filter :require_user, :only => [:new, :create]
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user, :only => :destroy
 
@@ -10,7 +11,8 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = "Login successful!"
-      redirect_back_or_default account_url
+      #redirect_back_or_default account_url
+      redirect_to "/users/#{current_user.id}" #TODO fix the acount_url
     else
       render :action => :new
     end

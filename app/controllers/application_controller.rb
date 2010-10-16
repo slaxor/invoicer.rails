@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     end
 
     def account_url
-      user_path(@user_session.user)
+      user_path
     end
 end
 
