@@ -5,13 +5,14 @@ require 'rails/all'
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
+I18n.default_locale = :de
 
 Time::DATE_FORMATS[:german_date] = '%d.%m.%Y'
 Time::DATE_FORMATS[:month_stamp] = '%Y%m'
 Time::DATE_FORMATS[:medium] = '%d.%m.%Y %H:%M'
 Mime::Type.register("text/plain", :tex)
 Mime::Type.register("application/pdf", :pdf)
-
+ActionView::Helpers::NumberHelper::DEFAULT_CURRENCY_VALUES = { :format => "%n%u", :unit => "€", :separator => ",", :delimiter => ".", :precision => 2, :significant => false, :strip_insignificant_zeros => false }
 module InvoicerRails
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

@@ -12,10 +12,19 @@ class Invoice < ActiveRecord::Base
     self.number = format('%s-%s%0.3i', customer.number, Time.now.to_s(:month_stamp), self.class.count(:conditions => {:contact_id => contact_id}))
   end
 
-  def price
-    service_invoice_items.sum
+  def hours
+    service_invoice_items.map(&:hours).sum
   end
 
-  def gross_price
+  def amount
+    service_invoice_items.map(&:amount).sum
+  end
+
+  def vat_amount
+    service_invoice_items.map(&:vat_amount).sum
+  end
+
+  def gross_amount
+    service_invoice_items.map(&:gross_amount).sum
   end
 end

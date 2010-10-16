@@ -1,36 +1,21 @@
-\documentclass[10pt,twoside,ngerman]{article}
-\usepackage{newcent}
-\renewcommand{\ttdefault}{newcent}
+\documentclass[ngerman]{article}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage[a4paper]{geometry}
+\usepackage[right]{eurosym}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{babel}
+\usepackage{calc}
+\usepackage{newcent}
+\usepackage{pifont}
+\usepackage{rotating}
+\usepackage{textcomp}
+
 \geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=1cm,headheight=0cm,headsep=0cm,footskip=0cm}
 \pagestyle{empty}
 \setcounter{secnumdepth}{5}
-\usepackage{array}
-
+\renewcommand{\ttdefault}{newcent}
 \makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-
-\usepackage{newcent}\usepackage{rotating}\usepackage[right]{eurosym}
-
-
-\usepackage{calc}
-
-\makeatletter
-\providecommand{\tabularnewline}{\\}
-
-\usepackage{babel}\makeatother
-
-
-\makeatother
-
-\usepackage{babel}
 \makeatother
 \begin{document}
 \vspace{1cm}
@@ -42,14 +27,9 @@
 
 <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>%
 \end{minipage}%
-
-
 \vspace{4cm}
-
-
-%
 \begin{minipage}[t][20mm]{70mm}%
-\underbar{\tiny <%= @invoice.invoicing_party.name %> | <%= @invoice.invoicing_party.street %> | <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>}{\tiny \par}
+\underbar{\tiny <%= @invoice.invoicing_party.name %> \ding{100} <%= @invoice.invoicing_party.street %> \ding{100} <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>}{\tiny \par}
 
 \label{recipient address}<%= @invoice.contact.name %>
 
@@ -63,45 +43,14 @@
 
 
 \textbf{\textsc{\huge Rechnung}}{\huge \par}
-Rechnungsnummer <%= @invoice.number %>
-\vspace{2cm}
+Rechnungsnummer <%= @invoice.number %> \vspace{2cm}
 
 
-\begin{tabular}{|l|l|l|l|r|r|r|r|}
-Anfang&
-Ende&
-Pausen&
-Beschreibung&
-Stunden&
-Preis (Netto)&
-Mwst&
-Preis (Brutto)\tabularnewline
-\hline
-<%- sum_hours = 0 -%>
-<%- sum_price = 0 -%>
-<%- sum_vat = 0 -%>
-<%- sum_gross_price = 0 -%>
-
-<%- @invoice.service_invoice_items.each do |invoice_item| -%>
-  <%- hours = invoice_item.ended_at - invoice_item.started_at -%>
-  <%- sum_hours += hours -%>
-  <%= invoice_item.started_at.to_s(:medium) %>&
-  <%= invoice_item.ended_at.to_s(:medium) %>&
-  <%= invoice_item.pause_times %>&
-  <%= invoice_item.description %>&
-  <%= hours = invoice_item.ended_at - invoice_item.started_at %>&
-  <%= price = invoice_item.pricing %>&
-  <%- sum_price += price -%>
-  <%= vat = invoice_item.pricing * invoice_item.vat_rate %> (<%= invoice_item.vat_rate * 100 %>\%)&
-  <%- sum_vat += vat -%>
-  <%= gross_price = price + vat %>\tabularnewline
-  <%- sum_gross_price += gross_price -%>
-<%- end -%>
-\hline
-\multicolumn{8}{r|}{Netto <%= sum_price %>\EUR}\tabularnewline
-\multicolumn{8}{r|}{<%= sum_vat %>\EUR}\tabularnewline
-\multicolumn{8}{r|}{\textbf{Zu Zahlender Betrag <%= (sum_gross_price) %>\EUR}}\tabularnewline
-\end{tabular}
+\begin{tabular}{lr}
+<%= number_with_delimiter(@invoice.hours, :separator => ",") %>  Stunden gemäss angehängter Leistungsaufstellung & <%= number_to_currency(@invoice.amount, :locale => :de) %> \tabularnewline
+Zuzüglich der gesetzlichen Mehrwehrtsteuer & <%=  number_to_currency(@invoice.vat_amount, :locale => :de) %> \tabularnewline
+Gesamt & <%= number_to_currency(@invoice.gross_amount, :locale => :de) %> \tabularnewline
+\end{tabular}\vfill{}
 \vfill{}
 \begin{tabular}{>{\raggedright}p{0.25\paperwidth}|>{\raggedright}p{0.25\paperwidth}|>{\raggedright}p{0.25\paperwidth}}
 \hline
@@ -115,6 +64,35 @@ Preis (Brutto)\tabularnewline
 {\tiny <%= @invoice.invoicing_party.bank_sort_code %>}{\tiny \par}
 {\tiny <%= @invoice.invoicing_party.bank %>}\tabularnewline
 \end{tabular}
+
+
+\pagebreak{}
+\begin{sideways}
+\begin{tabular}{|l|l|l|l|r|r|r|r|r|}
+Anfang&
+Ende&
+Pausen&
+Stunden&
+Beschreibung&
+Nettobetrag&
+Mwst.-Satz&
+Mwst.-Betrag&
+Gesamtbetrag\tabularnewline
+\hline
+<%- @invoice.service_invoice_items.each do |invoice_item| -%>
+  <%= invoice_item.started_at.to_s(:medium) %>&
+  <%= invoice_item.ended_at.to_s(:medium) %>&
+  <%= invoice_item.pause_times %>&
+  <%= number_with_delimiter(invoice_item.hours, :separator => ",") %>&
+  <%= invoice_item.description %>&
+  <%= number_to_currency(invoice_item.amount, :locale => :de) %>&
+  <%= number_with_delimiter(invoice_item.vat_rate * 100, :separator => ",") %>\%&
+  <%= number_to_currency(invoice_item.vat_amount, :locale => :de) %>&
+  <%= number_to_currency(invoice_item.gross_amount, :locale => :de) %>\tabularnewline
+<%- end -%>
+\hline
+\end{tabular}
+\end{sideways}
 {\tiny Dieses Dokument wurde mit \LaTeX erstellt}
 \end{document}
 
