@@ -1,0 +1,1 @@
+This Rails3 Application can manage your customer related data such as your hourly wage, working times pauses and so on and generates an invoice-pdf out of it, model-wise its barely working, the ui is in a non-funktional state lots of ressources should _RESTfully_ work though
