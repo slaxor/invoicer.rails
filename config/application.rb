@@ -12,7 +12,7 @@ Time::DATE_FORMATS[:month_stamp] = '%Y%m'
 Time::DATE_FORMATS[:medium] = '%d.%m.%Y %H:%M'
 Mime::Type.register("text/plain", :tex)
 Mime::Type.register("application/pdf", :pdf)
-ActionView::Helpers::NumberHelper::DEFAULT_CURRENCY_VALUES = { :format => "%n%u", :unit => "€", :separator => ",", :delimiter => ".", :precision => 2, :significant => false, :strip_insignificant_zeros => false }
+ActionView::Helpers::NumberHelper::DEFAULT_CURRENCY_VALUES = { :format => "%n %u", :unit => "€", :separator => ",", :delimiter => " ", :precision => 2, :significant => false, :strip_insignificant_zeros => false }
 module InvoicerRails
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

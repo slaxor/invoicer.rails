@@ -4,6 +4,11 @@ class Invoice < ActiveRecord::Base
   has_many :service_invoice_items, :dependent => :delete_all
   validates_uniqueness_of :number, :scope => :invoicing_party_id
 
+  # should make sure the due date is never before the print date
+  before_save do
+    (self.due_on = Date.today + 7.days) if due_on.to_time < printed_at
+  end
+
   def customer
     contact.customer
   end

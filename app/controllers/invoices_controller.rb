@@ -12,7 +12,11 @@ class InvoicesController < ApplicationController
         headers['Content-Disposition'] = %Q(attachment; filename="#{@invoice.number}.tex")
       end
       format.pdf do
-        prawnto :filename => "invoice_#{@invoice.customer.name}_#{@invoice.number}.pdf"
+        @invoice.update_attribute(:printed_at, Time.now) unless @invoice.printed_at
+        prawnto(
+          :filename => "invoice_#{@invoice.customer.name}_#{@invoice.number}.pdf",
+          :prawn => {:page_size => 'A4', :left_margin => 80, :right_margin => 50, :bottom_margin => 10 }
+        )
       end
     end
   end
