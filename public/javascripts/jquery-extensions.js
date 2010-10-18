@@ -12,7 +12,13 @@
       var box = '<div id="flashmsg" class="' + severity + '">' + message + '</div>';
       $('body').append(box);
       setTimeout(function() {$('#flashmsg').remove()}, timeout);
+    },
 
+    put: function(url, data, callback) {
+      $.ajax({url: url, type: 'PUT', data: data, success: callback});
+    },
+    del: function(url, callback) {
+      $.ajax({url: url, type: 'DELETE', success: callback});
     }
   })
 })(jQuery);

@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    redirect_to new_user_session_path if current_user.nil?
   end
 
   def update
@@ -22,5 +23,13 @@ class UsersController < ApplicationController
 
   def destroy
     render :json => @current_user.destroy
+  end
+
+  def environment
+    respond_to do |format|
+    format.js {render :json => {:rails_env => {
+      :current_user => @current_user.attributes.slice('id', 'login', 'email','current_login_ip')
+    }}}
+    end
   end
 end

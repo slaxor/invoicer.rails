@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101015011000) do
+ActiveRecord::Schema.define(:version => 20101017201426) do
 
   create_table "contacts", :force => true do |t|
     t.integer  "customer_id"
@@ -30,9 +30,18 @@ ActiveRecord::Schema.define(:version => 20101015011000) do
     t.string   "name"
     t.string   "number"
     t.integer  "user_id"
-    t.decimal  "default_hourly_wage", :precision => 10, :scale => 6
-    t.string   "default_currency",                                    :default => "\342\202\254"
-    t.decimal  "default_vat_rate",    :precision => 10, :scale => 10, :default => 0.19
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "defaults", :force => true do |t|
+    t.integer  "customer_id"
+    t.string   "currency",                                           :default => "\342\202\254"
+    t.decimal  "vat_rate",           :precision => 10, :scale => 10, :default => 0.19
+    t.decimal  "price",              :precision => 10, :scale => 6
+    t.string   "pricing_unit"
+    t.string   "pricing_strategy"
+    t.string   "due_on_calculation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,6 +56,7 @@ ActiveRecord::Schema.define(:version => 20101015011000) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "printed_at"
+    t.integer  "default_id"
   end
 
   create_table "invoicing_parties", :force => true do |t|

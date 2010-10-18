@@ -4,6 +4,9 @@ InvoicerRails::Application.routes.draw do |map|
   map.resource :user_session
 
   resources :users do
+    member do
+      get :environment
+    end
     resources :invoicing_parties
 
      resources :customers do

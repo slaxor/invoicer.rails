@@ -1,8 +1,9 @@
 %h4 Your invoice identities:
 %ul
-  = invoicing_parties.each do |invoicing_party|
+  - invoicing_parties.each do |invoicing_party|
     %li{:id => "invoicing-party-#{invoicing_party.id}", :class => 'invoicing_party'}
       = invoicing_party.name
+      %span.del-invoicing_party X
       .hidden
         co line:
         =invoicing_party.co_line

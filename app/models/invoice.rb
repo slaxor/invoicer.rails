@@ -1,6 +1,7 @@
 class Invoice < ActiveRecord::Base
   belongs_to :invoicing_party
   belongs_to :contact
+  belongs_to :default
   has_many :service_invoice_items, :dependent => :delete_all
   validates_uniqueness_of :number, :scope => :invoicing_party_id
 
