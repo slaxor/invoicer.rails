@@ -8,7 +8,7 @@ class InvoicingPartiesController < ApplicationController
   end
 
   def create
-    render :json => current_user.invoicing_parties << InvoicingParty.create(params[:invoicing_party])
+    render :json => (current_user.invoicing_parties << InvoicingParty.create(params[:invoicing_party])).last
   end
 
   def update
@@ -16,6 +16,7 @@ class InvoicingPartiesController < ApplicationController
   end
 
   def destroy
-    render :json => current_user.invoicing_parties.destroy(params[:id])
+    ip = current_user.invoicing_parties.destroy(params[:id])
+    render :json => "deleted invoicing party ##{params[:id]}"
   end
 end
