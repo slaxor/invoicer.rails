@@ -8,6 +8,7 @@
       var $li = $(this).parent()
       var id = $li.attr('id').match(/invoicing-party-(\d*)/)[1];
       $.del(location + '/invoicing_parties/' + id,  function(e){
+        console.info($li);
         $li.remove();
         $.flash('deleted invoicing party ' + id);
       });
@@ -22,7 +23,6 @@
         li += '<span class="del-invoicing_party">X</span>';
         li += '<div class="hidden">';
         li += '</li>';
-        console.info($(e.currentTarget).parent().siblings(':last'));
         $(e.currentTarget).parent().siblings(':last').append(li);
       });
     });

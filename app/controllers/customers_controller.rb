@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
    def index
-    render :json => @current_user.customers
+     render :json => { :models => @current_user.customers }
   end
 
   def show
@@ -8,11 +8,11 @@ class CustomersController < ApplicationController
   end
 
   def create
-    render :json => @current_user.customers << Customer.create(params[:customers])
+    render :json => (@current_user.customers << Customer.create(JSON.parse(params[:model]))).last
   end
 
   def update
-    render :json => @current_user.customers.update(params[:id], params[:customers])
+    render :json => @current_user.customers.update(params[:id], JSON.parse(params[:model]))
   end
 
   def destroy
