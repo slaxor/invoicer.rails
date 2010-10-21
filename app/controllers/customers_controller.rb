@@ -1,21 +1,18 @@
-class CustomersController < ApplicationController
-   def index
-     render :json => { :models => @current_user.customers }
-  end
-
-  def show
-    render :json => @current_user.customers.find(params[:id])
-  end
-
-  def create
-    render :json => (@current_user.customers << Customer.create(JSON.parse(params[:model]))).last
-  end
-
-  def update
-    render :json => @current_user.customers.update(params[:id], JSON.parse(params[:model]))
-  end
-
-  def destroy
-    render :json => @current_user.customers.destroy(params[:id])
+class CustomersController < BackboneController
+  private
+  def query_model(options = {})
+    action = options[:action] || params[:action]
+    case action
+    when 'index'
+      current_user.customers
+    when 'show'
+      current_user.customers.find(params[:id])
+    when 'create'
+      (current_user.customers.find(params[:id]) << Customer.create(params[:model])).last
+    when 'update'
+      current_user.customers.update(params[:id], params[:model])
+    when 'destroy'
+      current_user.customers.destroy(params[:id])
+    end
   end
 end

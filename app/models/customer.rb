@@ -4,6 +4,7 @@ class Customer < ActiveRecord::Base
   has_many :defaults, :dependent => :delete_all
   validates_uniqueness_of :name
   validates_uniqueness_of :number, :scope => :user_id
+  attr_protected :user_id
 
   def invoices
     contacts.find_by_kind('Invoice').invoices

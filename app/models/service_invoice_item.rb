@@ -1,6 +1,7 @@
 class ServiceInvoiceItem < ActiveRecord::Base
   belongs_to :invoice
   has_many :pauses, :dependent => :delete_all
+  attr_protected :invoice_id
 
   def hours
     (ended_at - started_at) / 3600 - pause_length

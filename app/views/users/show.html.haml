@@ -5,6 +5,7 @@
   = current_user.email
   ]
 %button#logout logout
-#customers= render :partial => 'customer_list', :locals => {:customers => current_user.customers}
+-##customers= render :partial => 'customer_list', :locals => {:customers => current_user.customers}
+%table#customers
 #invoicing_parties= render :partial => 'invoicing_party_list', :locals => {:invoicing_parties => current_user.invoicing_parties}
 

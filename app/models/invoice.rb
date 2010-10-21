@@ -4,6 +4,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :default
   has_many :service_invoice_items, :dependent => :delete_all
   validates_uniqueness_of :number, :scope => :invoicing_party_id
+  attr_protected :invoicing_party_id, :contact_id, :default_id
 
   # should make sure the due date is never before the print date
   before_save do
