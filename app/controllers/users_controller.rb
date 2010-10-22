@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :require_no_user, :only => [:new, :create]
-  skip_before_filter :require_user, :only => [:show, :edit, :update]
+  skip_before_filter :require_user, :only => [:new, :create]
 
   layout 'user'
 
@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    render :json => User.create(params[:user])
+    User.create(params[:user])
+    redirect_to user_session_path
   end
 
   def show
@@ -18,11 +19,14 @@ class UsersController < ApplicationController
   end
 
   def update
-    render :json => @current_user.update(params[:user])
+    current_user.update(params[:user])
+    redirect_to new_user_session_path if current_user.nil?
   end
 
   def destroy
-    render :json => @current_user.destroy
+    current_user.destroy
+    user_session.destroy
+    redirect_to new_user_session_path
   end
 
   def environment

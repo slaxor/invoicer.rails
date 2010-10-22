@@ -35,7 +35,14 @@ gem 'prawn'
 group :test do
   gem 'shoulda'
   gem 'rspec'
-  gem 'rspec-rails'
   gem 'factory_girl'
   gem 'faker'
+  gem 'rspec'
+  gem "rspec-rails", ">= 2.0.1"
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails'
+  gem 'cucumber'
+  gem 'spork'
+  gem 'launchy'    # So you can do Then show me the page
 end

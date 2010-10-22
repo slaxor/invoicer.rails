@@ -61,7 +61,7 @@ var InvoicingPartyCollection = Backbone.Collection.extend({
   url: location + '/invoicing_parties'
 });
 var invoicing_parties = new InvoicingPartyCollection;
-//invoicing_parties.fetch();
+invoicing_parties.fetch();
 
 $(document).ready(function() {
   var CustomerView = Backbone.View.extend({

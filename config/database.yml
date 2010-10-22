@@ -5,7 +5,7 @@ development: &dev
   password: invoicer
   host: 127.0.0.1
 
-test:
+test: &test
   <<: *dev
   database: invoicer_test
 
@@ -14,3 +14,6 @@ production:
   database: invoicer_production
 
 
+
+cucumber:
+  <<: *test

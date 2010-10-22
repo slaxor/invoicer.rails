@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  has_many :invoices, :dependent => :delete_all
   has_many :invoicing_parties, :dependent => :delete_all
   has_many :customers, :dependent => :delete_all
   acts_as_authentic do |c|
