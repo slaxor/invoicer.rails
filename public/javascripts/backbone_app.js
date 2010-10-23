@@ -1,19 +1,6 @@
-//var User = Backbone.Model.extend({
-  //initialize: function(json) {
-    //console.log('new User:' + json);
-  //},
-  //url: '/users'
-//});
-//var UserCollection = Backbone.Collection.extend({
-  //model: User,
-  //url: '/users'
-//});
-//var users = new UserCollection;
-//users.fetch();
-
 var Customer = Backbone.Model.extend({
   initialize: function(json) {
-    console.log('new Customer:' + json.name);
+    //console.log('new Customer:' + json.name);
     console.info(this);
   }
 });
@@ -27,7 +14,7 @@ var customers = new CustomerCollection;
 
 var Contact = Backbone.Model.extend({
   initialize: function(json) {
-    console.log('new Contact:' + json.name);
+    //console.log('new Contact:' + json.name);
     id = json.id;
   }
 });
@@ -40,20 +27,7 @@ var contacts = new ContactCollection;
 
 var InvoicingParty = Backbone.Model.extend({
   initialize: function(json) {
-    console.log('new InvoicingParty:' + json.name);
-  }
-});
-var InvoicingPartyCollection = Backbone.Collection.extend({
-  model: InvoicingParty,
-  url: location + '/invoicing_parties'
-});
-var invoicing_parties = new InvoicingPartyCollection;
-//invoicing_parties.fetch();
-
-var InvoicingParty = Backbone.Model.extend({
-
-  initialize: function(json) {
-    console.log('new InvoicingParty:' + json.name);
+    //console.log('new InvoicingParty:' + json.name);
   }
 });
 var InvoicingPartyCollection = Backbone.Collection.extend({
@@ -63,11 +37,22 @@ var InvoicingPartyCollection = Backbone.Collection.extend({
 var invoicing_parties = new InvoicingPartyCollection;
 invoicing_parties.fetch();
 
+var Invoice = Backbone.Model.extend({
+
+  initialize: function(json) {
+    console.log('new Invoice:' + json.name);
+  }
+});
+//var InvoiceCollection = Backbone.Collection.extend({
+  //model: Invoice,
+  //url: location + '/invoices'
+//});
+//var invoices = new InvoiceCollection;
+//invoices.fetch();
+
 $(document).ready(function() {
   var CustomerView = Backbone.View.extend({
-
      //events: { "submit #chatForm" : "handleNewMessage" }
-
     //, handleNewMessage: function(data) {
       //var inputField = $('input[name=newMessageString]');
       //messages.create({content: inputField.val()});
@@ -75,27 +60,36 @@ $(document).ready(function() {
     //}
 
     render: function() {
-      var data = customers.map(function(m) {
-          return m.attributes;
-        }).map(function(r,i) {
-          return [r.id, r.name, r.number];
+      var data = '';
+      data += '<tr>';
+      $.each(customers.first().attributes, (function(k,v) {data += '<th>' + k + '</th>'}));
+      data += '</tr>';
+      customers.each(function(m) {
+        data += '<tr>';
+        $.each(m.attributes, function(k, v){data += '<td>' + v + '</td>'});
+        data += '</tr>';
       });
-      //var data = customers.map(function(customer) {
-        //var list_item = _.template(templates.cutomer);
-        //console.log(list_item({name: customer.get("name")}));
-        //return list_item({name: customer.get("name")});
-      $("#customers").html('<ul>' + data + '</ul>');
+      $('#customers').html(data);
       return this;
       }
   });
 
   var customer_view = new CustomerView(/*{el: $('#customers')}*/);
-  Backbone.sync();
-  //customers.fetch({success: function(){customer_view.render();}});
+  customers.fetch({success: function(){customer_view.render();}});
   setInterval(function(){
     customers.fetch({success: function(){customer_view.render();}});
   },300000)
 
 });
+
+//$('#customers').jqGrid({
+    //colNames: ['id', 'name', 'number'],
+    //colModel: [
+      //{name:'id', width:30, sortable:true, align:'center'},
+      //{name:'name', width:80, sortable:true, align:'center'},
+      //{name:'number', width:80, sortable:true, align:'center'}
+    //],jsonReader : {
+      //root: "models"}
+//});
 //var data = customers.map(function(m) { return m.attributes; }).map(function(r,i) { return [r.id, r.name, r.number]; });
 //var foo = { url:'/users/1/customers', datatype: "json", colNames:['Inv No','Date', 'Client', 'Amount','Tax','Total','Notes'], colModel:[ {name:'id',index:'id', width:55}, {name:'invdate',index:'invdate', width:90}, {name:'name',index:'name asc, invdate', width:100}, {name:'amount',index:'amount', width:80, align:"right"}, {name:'tax',index:'tax', width:80, align:"right"}, {name:'total',index:'total', width:80,align:"right"}, {name:'note',index:'note', width:150, sortable:false} ], rowNum:10, rowList:[10,20,30], pager: '#pager2', sortname: 'id', viewrecords: true, sortorder: "desc", caption:"JSON Example" };
