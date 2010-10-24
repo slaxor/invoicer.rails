@@ -10,21 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101017201426) do
-
-  create_table "contacts", :force => true do |t|
-    t.integer  "customer_id"
-    t.string   "name"
-    t.string   "email"
-    t.string   "telephone"
-    t.string   "street"
-    t.string   "post_code"
-    t.string   "city"
-    t.string   "country"
-    t.string   "kind"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20101024200024) do
 
   create_table "customers", :force => true do |t|
     t.string   "name"
@@ -32,6 +18,12 @@ ActiveRecord::Schema.define(:version => 20101017201426) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
+    t.string   "telephone"
+    t.string   "street"
+    t.string   "post_code"
+    t.string   "city"
+    t.string   "country"
   end
 
   create_table "defaults", :force => true do |t|
@@ -47,7 +39,7 @@ ActiveRecord::Schema.define(:version => 20101017201426) do
   end
 
   create_table "invoices", :force => true do |t|
-    t.integer  "contact_id",                            :null => false
+    t.integer  "customer_id",                           :null => false
     t.string   "number",                                :null => false
     t.text     "covering_text"
     t.integer  "invoicing_party_id",                    :null => false

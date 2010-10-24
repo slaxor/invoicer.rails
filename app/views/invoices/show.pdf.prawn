@@ -3,7 +3,6 @@ pdf.page.size = 'A4'
 #pdf.font "/usr/share/fonts/truetype/msttcorefonts/georgia.ttf"
 #pdf.font "Times-Roman"
 pdf.font "Helvetica"
-# pdf.stroke_bounds #debugging
 sender_address = [@invoice.invoicing_party.name, @invoice.invoicing_party.street, "#{@invoice.invoicing_party.post_code} #{@invoice.invoicing_party.city}"]
 print_date = @invoice.printed_at.to_s(:german_date)
 
@@ -14,10 +13,10 @@ pdf.bounding_box [pdf.margin_box.left, pdf.margin_box.top - 100], :width => 200 
       @invoice.invoicing_party.post_code,
       @invoice.invoicing_party.city), :size => 6)
   pdf.move_down 15
-  pdf.text @invoice.contact.name
-  pdf.text @invoice.contact.street
+  pdf.text @invoice.customer.name
+  pdf.text @invoice.customer.street
   pdf.move_down 10
-  pdf.text "#{@invoice.contact.post_code} #{@invoice.contact.city}", :style => :bold
+  pdf.text "#{@invoice.customer.post_code} #{@invoice.customer.city}", :style => :bold
 end
 
 pdf.text_box("#{@invoice.invoicing_party.city}, #{print_date}",

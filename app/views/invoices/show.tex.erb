@@ -31,11 +31,11 @@
 \begin{minipage}[t][20mm]{70mm}%
 \underbar{\tiny <%= @invoice.invoicing_party.name %> \ding{100} <%= @invoice.invoicing_party.street %> \ding{100} <%= @invoice.invoicing_party.post_code %> <%= @invoice.invoicing_party.city %>}{\tiny \par}
 
-\label{recipient address}<%= @invoice.contact.name %>
+\label{recipient address}<%= @invoice.customer.name %>
 
-<%= @invoice.contact.street %>\\
+<%= @invoice.customer.street %>\\
 
-\textbf{<%= @invoice.contact.post_code %> <%= @invoice.contact.city %>}
+\textbf{<%= @invoice.customer.post_code %> <%= @invoice.customer.city %>}
 \end{minipage}%
 \hfill{}<%= @invoice.invoicing_party.city %>, <%= @invoice.printed_at.to_s(:german_date) %>
 

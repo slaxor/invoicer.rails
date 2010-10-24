@@ -4,7 +4,13 @@ class CreateCustomers < ActiveRecord::Migration
       t.string :name
       t.string :number
       t.integer :user_id
-      t.timestamps
+      t.string :email
+      t.string :telephone
+      t.string :street
+      t.string :post_code
+      t.string :city
+      t.string :country
+    t.timestamps
     end
   end
 

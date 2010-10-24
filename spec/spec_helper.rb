@@ -1,27 +1,33 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
+# This file is copied to ~/spec when you run 'ruby script/generate rspec'
+# from the project root directory.
 ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
-require 'rspec/rails'
+require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
+#require 'spec/autorun'
+require 'spec/rails'
+require 'remarkable_rails'
+require 'webrat'
+require File.expand_path(File.dirname(__FILE__) + "/example_helper_methods")
+require 'faker_additions/init'
 
-# Requires supporting ruby files with custom matchers and macros, etc,
-# in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-RSpec.configure do |config|
-  # == Mock Framework
-  #
-  # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_with :mocha
-  # config.mock_with :flexmock
-  # config.mock_with :rr
-  config.mock_with :rspec
-
-  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
-  # If you're not using ActiveRecord, or you'd prefer not to run each of your
-  # examples within a transaction, remove the following line or assign false
-  # instead of true.
+Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
+  config.use_instantiated_fixtures  = false
+  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  config.include Webrat::Matchers, :type => :views
+end
+
+# for image testing
+require 'action_controller/test_process'
+Factory.class_eval do
+  def attachment(name, path, content_type = nil)
+    path_with_rails_root = "#{RAILS_ROOT}/#{path}"
+    uploaded_file = if content_type
+                      ActionController::TestUploadedFile.new(path_with_rails_root, content_type)
+                    else
+                      ActionController::TestUploadedFile.new(path_with_rails_root)
+                    end
+
+    add_attribute name, uploaded_file
+  end
 end

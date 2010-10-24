@@ -4,19 +4,19 @@ class BackboneController < ApplicationController
   end
 
   def show
-    render :json => {:model => current_user.customers.find(params[:customer_id]).contacts.find(params[:id])}
+    render :json => {:model => query_model}
   end
 
   def create
-    render :json => {:model => current_user.customers.find(params[:customer_id]).contacts << Contact.create(params[:model])}
+    render :json => {:model => query_model}
   end
 
   def update
-    render :json => {:model => current_user.customers.find(params[:customer_id]).contacts.update(params[:id], params[:model])}
+    render :json => {:model => query_model}
   end
 
   def destroy
-    render :json => {:model => current_user.customers.find(params[:customer_id]).contacts.destroy(params[:id])}
+    render :json => {:model => query_model}
   end
   private
   def query_model(options = {})

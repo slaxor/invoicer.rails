@@ -1,25 +1,10 @@
 var Customer = Backbone.Model.extend({
 });
-
 var CustomerCollection = Backbone.Collection.extend({
   model: Customer,
   url: location + '/customers'
 });
-
 var customers = new CustomerCollection;
-
-
-var Contact = Backbone.Model.extend({
-});
-
-var ContactCollection = Backbone.Collection.extend({
-  model: Contact,
-  url: location + '/contacts'
-});
-
-var contacts = new ContactCollection;
-//contacts.fetch({success:function() {console.log(contacts.get(1).get('name'))}})
-
 
 var InvoicingParty = Backbone.Model.extend({
 });
@@ -33,19 +18,41 @@ var invoicing_parties = new InvoicingPartyCollection;
 
 var Invoice = Backbone.Model.extend({
 });
-//var InvoiceCollection = Backbone.Collection.extend({
-  //model: Invoice,
-  //url: location + '/invoices'
-//});
-//var invoices = new InvoiceCollection;
-//invoices.fetch();
+var InvoiceCollection = Backbone.Collection.extend({
+  model: Invoice,
+  url: function() {
+    return location + '/customers/' + this.customer_id + '/invoices';
+  }
+});
+var invoices = new InvoiceCollection;
+
 var customers_template = $.get('/_customers_template.html')
 var invoicing_parties_template = $.get('/_invoicing_parties_template.html')
 $(document).ready(function() {
   var CustomerView = Backbone.View.extend({
+    events: {
+      "click .name": "handle_details",
+      "click .create": "handle_create",
+      "click .edit": "handle_edit",
+      "click .delete": "handle_delete"
+    },
     render: function() {
       $('#customers').html(_.template(customers_template.responseText, customers))
       return this;
+    },
+    handle_details: function(e) {
+      customers.customer_id = $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];
+      customers.fetch({success: function(){customers_view.render();}})
+      $(e.currentTarget).siblings('div').toggleClass('hidden');
+    },
+    handle_create: function(e) {
+      console.log($(e.currentTarget));
+    },
+    handle_edit: function(e) {
+      console.log($(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1]);
+    },
+    handle_delete: function(e) {
+      console.log(e);
     }
   });
 
@@ -62,6 +69,33 @@ $(document).ready(function() {
       return this;
     },
     handle_details: function(e) {
+      $(e.currentTarget).siblings('div').toggleClass('hidden');
+    },
+    handle_create: function(e) {
+      console.log($(e.currentTarget));
+    },
+    handle_edit: function(e) {
+      console.log($(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1]);
+    },
+    handle_delete: function(e) {
+      console.log(e);
+    }
+  });
+
+  var InvoiceView = Backbone.View.extend({
+    events: {
+      "click .name": "handle_details",
+      "click .create": "handle_create",
+      "click .edit": "handle_edit",
+      "click .delete": "handle_delete"
+    },
+    render: function() {
+      $('#invoices').html(_.template(invoices_template.responseText, customers))
+      return this;
+    },
+    handle_details: function(e) {
+      invoices.customer_id = $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];
+      invoices.fetch({success: function(){invoices_view.render();}})
       $(e.currentTarget).siblings('div').toggleClass('hidden');
     },
     handle_create: function(e) {
