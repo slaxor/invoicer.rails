@@ -1,24 +1,19 @@
 (function($) {
   $.extend({
-    harvest_form: function(selectors) {
-      var form = {}
-      $.each(selectors, function(i,s) {form[$(s).attr('name')] = s.value;})
-      return form;
-    },
-
     flash: function(message, severity, timeout) {
       timeout = timeout || 2000;
       severity = severity || 'info';
       var box = '<div id="flashmsg" class="' + severity + '">' + message + '</div>';
       $('body').append(box);
       setTimeout(function() {$('#flashmsg').remove()}, timeout);
-    },
-
-    put: function(url, data, callback) {
-      $.ajax({url: url, type: 'PUT', data: data, success: callback});
-    },
-    del: function(url, callback) {
-      $.ajax({url: url, type: 'DELETE', success: callback});
     }
-  })
+  });
+
+  $.fn.harvest = function() {
+    var form = {};
+    this.each(function(index, el) {
+      form[$(el).attr('name')] = el.value
+    });
+    return form
+  }
 })(jQuery);

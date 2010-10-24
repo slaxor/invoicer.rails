@@ -1,0 +1,12 @@
+<h4>Customers <span class="create"></span></h4>
+<ul>
+  <% customers.each(function(m) { %>
+  <li id="customer-<%= m.get('id') %>">
+    <%= m.get('name') %>
+    (<%= m.get('number') %>)
+    <span class="edit"></span> <span class="delete"></span>
+  </li>
+  <% }); %>
+</ul>
+<form
+

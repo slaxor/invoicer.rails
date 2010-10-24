@@ -1,0 +1,25 @@
+<h4>Invoicing Parties <span class="create"></span></h4>
+<ul>
+  <% invoicing_parties.each(function(m) { %>
+  <li id="invoicing_party-<%= m.get('id') %>">
+    <span class="name" title="click for details"><%= m.get('name') %></span> <span class="edit"></span> <span class="delete"></span>
+    <div class="hidden">
+      co_line <%= m.get('co_line') %><br/>
+      street: <%= m.get('street') %><br/>
+      post_code: <%= m.get('post_code') %><br/>
+      city: <%= m.get('city') %><br/>
+      country: <%= m.get('country') %><br/>
+      vatid: <%= m.get('vatid') %><br/>
+      taxnumber: <%= m.get('taxnumber') %><br/>
+      currency: <%= m.get('currency') %><br/>
+      bank: <%= m.get('bank') %><br/>
+      bank_account_number: <%= m.get('bank_account_number') %><br/>
+      bank_sort_code: <%= m.get('bank_sort_code') %><br/>
+      telephone: <%= m.get('telephone') %><br/>
+      email: <%= m.get('email') %>
+    </div>
+  </li>
+  <% }); %>
+</ul>
+<form
+
