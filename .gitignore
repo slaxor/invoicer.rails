@@ -4,5 +4,4 @@ log/*.log
 tmp/**/*
 public/stylesheets/*.css
 db/*.sql
-**.lock
 tmp/**
