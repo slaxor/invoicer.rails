@@ -16,9 +16,10 @@ ssh_options[:username] = ENV['USER']
 after "deploy:migrations", "deploy:cleanup"
 
 #desc "link in production database configuration"
-#task :after_update_code, :roles => [:app] do
-  #run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
-#end
+task :after_update_code, :roles => [:app] do
+  run "ln -nfs #{shared_path}/bundle #{release_path}/vendor/bundle"
+  run "bundle install --deployment --without=test"
+end
 
 
 
