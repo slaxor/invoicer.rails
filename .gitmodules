@@ -1,3 +1,7 @@
 [submodule "dynamic_form"]
   path = ./vendor/plugins/dynamic_form
   url = http://github.com/rails/dynamic_form.git
+
+[submodule "vendor/plugins/authlogic"]
+  path = vendor/plugins/authlogic
+  url = git://github.com/odorcicd/authlogic.git
