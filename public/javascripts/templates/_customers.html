@@ -1,0 +1,20 @@
+<h4>Customers <span class="create"></span></h4>
+<ul>
+  <% customers.each(function(m) { %>
+  <li id="customer-<%= m.get('id') %>">
+  <span class="name" title="click for details"><%= m.get('name') %> </span>
+    (<%= m.get('number') %>)
+    <span class="edit"></span> <span class="delete"></span>
+     <div class="hidden">
+      street: <%= m.get('street') %><br/>
+      post_code: <%= m.get('post_code') %><br/>
+      city: <%= m.get('city') %><br/>
+      country: <%= m.get('country') %><br/>
+      telephone: <%= m.get('telephone') %><br/>
+      email: <%= m.get('email') %>
+    </div>
+  </li>
+  <% }); %>
+</ul>
+<form
+

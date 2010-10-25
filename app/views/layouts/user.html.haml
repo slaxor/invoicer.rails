@@ -3,7 +3,8 @@
   %head
     %title InvoicerRails
     = stylesheet_link_tag 'invoicer.css', 'jquery-ui-1.8.5.custom.css', :cache => true
-    = javascript_include_tag 'jquery-1.4.2.min.js', 'jquery-ui-1.8.5.custom.min.js', 'jquery-extensions.js', 'underscore-min.js', 'backbone.js', 'user.js', 'backbone_app.js', :cache => true
+    = javascript_include_tag ['jquery-1.4.2.min.js', 'jquery-ui-1.8.5.custom.min.js', 'jquery-extensions.js', 'underscore-min.js',
+      'backbone.js', 'user.js',Dir.glob('public/javascripts/{models,collections,views}/*').map {|f| f[19..-1]}, 'backbone_app.js'], :cache => true
     = csrf_meta_tag
   %body
     = yield
