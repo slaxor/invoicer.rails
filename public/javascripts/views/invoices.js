@@ -12,8 +12,11 @@ var InvoicesView = Backbone.View.extend({
     return this;
   },
   handle_details: function(e) {
-    invoices.customer_id = $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];
-    invoices.fetch({success: function(){invoices_view.render();}})
+    var invoice_id = $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];
+    if(service_invoice_items.invoice_id !== invoice_id) {
+      service_invoice_items.invoice_id = invoice_id;
+      service_invoice_items.fetch({success: function(){service_invoice_items_view.render();}});
+    }
     $(e.currentTarget).siblings('div').toggleClass('hidden');
   },
   handle_create: function(e) {
