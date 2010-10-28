@@ -1,8 +1,8 @@
-<h4>Invoices <span class="create"></span></h4>
+<h4>Invoices <button class="create"></button></h4>
 <ul>
   <% invoices.each(function(m) { %>
   <li id="invoice-<%= m.get('id') %>" class="<%= m.get('status') %>">
-    <span class="name" title="click for details"><%= m.get('number') %></span> <span class="edit"></span> <span class="delete"></span>
+    <strong class="name" title="click for details"><%= m.get('number') %></strong> <button class="edit"></button> <button class="delete"></button>
     <div class="hidden">
       covering_text: <%= m.get('covering_text') %><br/>
       due_on: <%= m.get('due_on') %><br/>

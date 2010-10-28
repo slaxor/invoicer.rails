@@ -1,25 +1,28 @@
-<h4>Invoicing Parties <span class="create"></span></h4>
+<h4>Invoicing Parties <button class="create"></button></h4>
 <ul>
   <% invoicing_parties.each(function(m) { %>
   <li id="invoicing_party-<%= m.get('id') %>">
-    <span class="name" title="click for details"><%= m.get('name') %></span> <span class="edit"></span> <span class="delete"></span>
-    <div class="hidden">
-      co_line <%= m.get('co_line') %><br/>
-      street: <%= m.get('street') %><br/>
-      post_code: <%= m.get('post_code') %><br/>
-      city: <%= m.get('city') %><br/>
-      country: <%= m.get('country') %><br/>
-      vatid: <%= m.get('vatid') %><br/>
-      taxnumber: <%= m.get('taxnumber') %><br/>
-      currency: <%= m.get('currency') %><br/>
-      bank: <%= m.get('bank') %><br/>
-      bank_account_number: <%= m.get('bank_account_number') %><br/>
-      bank_sort_code: <%= m.get('bank_sort_code') %><br/>
-      telephone: <%= m.get('telephone') %><br/>
-      email: <%= m.get('email') %>
-    </div>
+    <strong class="name" ><%= m.get('name') %></strong>
+    <button type="button" class="details" title="click for details">
+    </button> <button type="button" class="invoices"></button>
+    <button type="button" class="edit"></button>
+    <button type="button" class="delete"></button>
+    <ul class="details-list">
+      <li>co_line <%= m.get('co_line') %></li>
+      <li>street: <%= m.get('street') %></li>
+      <li>post_code: <%= m.get('post_code') %></li>
+      <li>city: <%= m.get('city') %></li>
+      <li>country: <%= m.get('country') %></li>
+      <li>vatid: <%= m.get('vatid') %></li>
+      <li>taxnumber: <%= m.get('taxnumber') %></li>
+      <li>currency: <%= m.get('currency') %></li>
+      <li>bank: <%= m.get('bank') %></li>
+      <li>bank_account_number: <%= m.get('bank_account_number') %></li>
+      <li>bank_sort_code: <%= m.get('bank_sort_code') %></li>
+      <li>telephone: <%= m.get('telephone') %></li>
+      <li>email: <%= m.get('email') %></li>
+    </ul>
   </li>
   <% }); %>
 </ul>
-<form
 

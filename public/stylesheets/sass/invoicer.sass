@@ -1,6 +1,13 @@
 body
   //background-image: -moz-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet)
+  border-radius: 20% 20% 20% 20%
   -moz-border-radius: 20% 20% 20% 20%
+  -webkit-border-radius: 20% 20% 20% 20%
+
+strong
+  font-style: italic
+  font-variant: small-caps
+  font-weight: lighter
 
 #customers, #invoicing_parties, #invoices
   border: 1px solid #a0a0a0
@@ -30,26 +37,33 @@ body
 .fatal
   background-color: rgba(255,0, 0, 0.9)
 
-.hidden
+.details-list
   display: none
+
+.details-list.show
+  display: block
+
+
+.create, .edit, .delete, .details, .invoices
+  display: inline-block
+  height: 16px
+  width: 16px
+  border: 0
+
+.details
+  background: url("/images/silk.png") repeat scroll -5px -734px transparent
+
+.invoices
+  background: url("/images/silk.png") repeat scroll -1407px -871px transparent
 
 .create
   background: url("/images/silk.png") repeat scroll -6px -19px transparent
-  display: inline-block
-  height: 16px
-  width: 16px
 
 .edit
   background: url("/images/silk.png") repeat scroll -1126px -871px transparent
-  display: inline-block
-  height: 16px
-  width: 16px
 
 .delete
   background: url("/images/silk.png") repeat scroll -566px -242px transparent
-  display: inline-block
-  height: 16px
-  width: 16px
 
 .unpaid
   background-color: #ffffa0

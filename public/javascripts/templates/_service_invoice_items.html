@@ -1,4 +1,4 @@
-<h4>Invoice items <span class="create"></span></h4>
+<h4>Invoice items <button class="create"></button></h4>
 <table>
   <tr>
     <th>started_at</th><th>ended_at</th><th>pauses</th><th>description</th><th>pricing_unit</th><th>pricing_strategy</th><th>vat_rate</th><th>price</th><th>currency</th><th>actions</th>
@@ -14,7 +14,7 @@
     <td><%= m.get('vat_rate') %></td>
     <td><%= m.get('price') %></td>
     <td><%= m.get('currency') %></td>
-    <td><span class="edit"></span> <span class="delete"></span></td>
+    <td><button class="edit"></button> <button class="delete"></button></td>
   </tr>
   <% }); %>
 </table>

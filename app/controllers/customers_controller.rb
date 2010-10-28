@@ -8,7 +8,8 @@ class CustomersController < BackboneController
     when 'show'
       current_user.customers.find(params[:id])
     when 'create'
-      (current_user.customers.find(params[:id]) << Customer.create(params[:model])).last
+      debugger
+      (current_user.customers << Customer.create!(params[:model])).last
     when 'update'
       current_user.customers.update(params[:id], params[:model])
     when 'destroy'
