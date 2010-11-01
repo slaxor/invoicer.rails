@@ -9,7 +9,6 @@ class BackboneController < ApplicationController
   end
 
   def create
-      debugger
     params[:model] = JSON.parse(params[:model]) if params[:model]
     render :json => {:model => query_model}
   end

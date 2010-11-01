@@ -2,6 +2,7 @@ var get_template = function(template) {
   var t = $.ajax({url: '/javascripts/templates/_' + template + '.html', type: 'GET', async: false});
   return t.responseText;
 }
+
 var customers = new CustomerCollection;
 var invoicing_parties = new InvoicingPartyCollection;
 var invoices = new InvoiceCollection;
@@ -18,7 +19,7 @@ $(document).ready(function() {
   service_invoice_items_view = new ServiceInvoiceItemsView({el: $('#service_invoice_items-' + service_invoice_items.invoice_id)});
   customers.fetch({success: function(){customers_view.render();}});
   invoicing_parties.fetch({success: function(){invoicing_parties_view.render();}});
-
+  //$('.window').live('ready', function(e) {console.info(this);$(this).draggable();});
   //setInterval(function(){
     //customers.fetch({success: function(){customers_view.render();}});
     //invoicing_parties.fetch({success: function(){invoicing_parties_view.render();}});

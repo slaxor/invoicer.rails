@@ -2,7 +2,7 @@
 <ul>
   <% customers.each(function(m) { %>
   <li id="customer-<%= m.get('id') %>">
-  <strong class="name" title="click for details"><%= m.get('name') %>(<%= m.get('number') %>)</strong>
+  <strong class="name"><%= m.get('name') %>(<%= m.get('number') %>)</strong>
     <button type="button" class="details" title="click for details"></button>
     <button type="button" class="invoices" title="click to see this customers invoices"></button>
     <button type="button" class="edit" title="click to edit"></button>

@@ -14,14 +14,14 @@ var CustomersView = Backbone.View.extend({
     return this;
   },
 
-  get_id: function(e) {return $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];},
+  get_customer_id: function(e) {return $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];},
 
   handle_details: function(e) {
     $(e.currentTarget).siblings('.details-list').toggleClass('show');
   },
 
   handle_invoices: function(e) {
-    var customer_id = $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];
+    var customer_id = this.get_customer_id(e);
     if(invoices.customer_id !== customer_id) {
       invoices.customer_id = customer_id;
       invoices.fetch({success: function(){invoices_view.render();}});
@@ -32,12 +32,11 @@ var CustomersView = Backbone.View.extend({
     var $customer_form = $('#customer-form').html(_.template(this.form, {m: customers.add().last()}));
   },
   handle_edit: function(e) {
-    var id = $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];
     this.form = this.form || get_template('customer_form');
-    var $customer_form = $('#customer-form').html(_.template(this.form, {m: customers.get(id)}));
+    var $customer_form = $('#customer-form').html(_.template(this.form, {m: customers.get(this.get_customer_id(e))}));
   },
   handle_delete: function(e) {
-    customers.get(this.get_id(e)).destroy();
+    customers.get(this.get_customer_id(e)).destroy();
   },
   handle_ok: function(e) {
     var attributes = $(e.currentTarget).parent().harvest();

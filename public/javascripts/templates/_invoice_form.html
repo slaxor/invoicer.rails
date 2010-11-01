@@ -1,0 +1,24 @@
+<h4><%= m.isNew() ? 'New' : 'Change'%> Invoice</h4>
+<form>
+  <fieldset>
+    <input type="hidden" name="id" value="<%= m.get('id') %>">
+    <label for="number">Number</label>
+    <input type="text" name="number" value="<%= m.get('number') %>"/>
+    <label for="covering_text">Covering text</label>
+    <input type="text" name="covering_text" value="<%= m.get('covering_text') %>" />
+    <label for="paid">Paid</label>
+    <input type="checkbox" name="paid" checked="<%= m.get('paid') ? 'checked' : '' %>" />
+    <label for="printed_at">Printed at</label>
+    <input type="text" name="printed_at" value="<%= m.get('printed_at') %>" />
+    <label for="invoicing_party">Invoicing party</label>
+    <select name="invoicing_party">
+    <% invoicing_parties.each(function(m) { %>
+      <option value="<%= m.get('id') %>"><%= m.get('name') %></option>
+    <% }); %>
+    </select>
+    <button type="button" class="ok" title="click to create your invoice"></button>
+    <button type="button" class="cancel" title="click to abandon this dialog"></button>
+  </fieldset>
+</form>
+
+

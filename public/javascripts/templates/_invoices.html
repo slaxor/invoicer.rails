@@ -2,13 +2,17 @@
 <ul>
   <% invoices.each(function(m) { %>
   <li id="invoice-<%= m.get('id') %>" class="<%= m.get('status') %>">
-    <strong class="name" title="click for details"><%= m.get('number') %></strong> <button class="edit"></button> <button class="delete"></button>
-    <div class="hidden">
-      covering_text: <%= m.get('covering_text') %><br/>
-      due_on: <%= m.get('due_on') %><br/>
-      printed_at: <%= m.get('printed_at') %><br/>
-      <div id="service_invoice_items-<%= m.get('id') %>"></div>
-    </div>
+    <strong class="name"><%= m.get('number') %></strong>
+    <button type="button" class="details" title="click for details"></button>
+    <button type="button" class="invoices" title="click to see this customers invoices"></button>
+    <button type="button" class="edit" title="click to edit"></button>
+    <button type="button" class="delete" title="click to destroy (no questions asked!)"></button>
+    <ul class="details-list">
+      <li>covering_text: <%= m.get('covering_text') %></li>
+      <li>due_on: <%= m.get('due_on') %></li>
+      <li>printed_at: <%= m.get('printed_at') %></li>
+      <li id="service_invoice_items-<%= m.get('id') %>"></li>
+    </ul>
   </li>
   <% }); %>
 </ul>
