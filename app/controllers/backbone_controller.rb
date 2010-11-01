@@ -4,18 +4,23 @@ class BackboneController < ApplicationController
   end
 
   def show
+    params[:model] = JSON.parse(params[:model]) if params[:model]
     render :json => {:model => query_model}
   end
 
   def create
+      debugger
+    params[:model] = JSON.parse(params[:model]) if params[:model]
     render :json => {:model => query_model}
   end
 
   def update
+    params[:model] = JSON.parse(params[:model]) if params[:model]
     render :json => {:model => query_model}
   end
 
   def destroy
+    params[:model] = JSON.parse(params[:model]) if params[:model]
     render :json => {:model => query_model}
   end
   private

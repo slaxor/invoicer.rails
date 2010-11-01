@@ -1,20 +1,27 @@
 body
   //background-image: -moz-linear-gradient(left, red, orange, yellow, green, blue, indigo, violet)
-  border-radius: 20% 20% 20% 20%
-  -moz-border-radius: 20% 20% 20% 20%
-  -webkit-border-radius: 20% 20% 20% 20%
+
+fieldset
+  border: 0
 
 strong
   font-style: italic
   font-variant: small-caps
   font-weight: lighter
 
-#customers, #invoicing_parties, #invoices
+label
+  color: rgba(60,60,60,0.7)
+  display: block
+
+.window
   border: 1px solid #a0a0a0
   display: inline-table
   padding: 0 15px
   //background-image: -moz-radial-gradient(center 45deg, circle closest-side, orange 0%, red 100%)
+  border-radius: 10px 10px 10px 10px
   -moz-border-radius: 10px 10px 10px 10px
+  -webkit-border-radius: 10px 10px 10px 10px
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.9)
 
 #flashmsg
   position: fixed
@@ -43,12 +50,16 @@ strong
 .details-list.show
   display: block
 
+.details-list li
+  list-style: none
 
-.create, .edit, .delete, .details, .invoices
+.create, .edit, .delete, .details, .invoices, .ok, .cancel
   display: inline-block
   height: 16px
   width: 16px
   border: 0
+  float: right
+  margin-left: 6px
 
 .details
   background: url("/images/silk.png") repeat scroll -5px -734px transparent
@@ -57,13 +68,19 @@ strong
   background: url("/images/silk.png") repeat scroll -1407px -871px transparent
 
 .create
-  background: url("/images/silk.png") repeat scroll -6px -19px transparent
+  background: url("/images/silk.png") repeat scroll -6px -21px transparent
 
 .edit
   background: url("/images/silk.png") repeat scroll -1126px -871px transparent
 
 .delete
   background: url("/images/silk.png") repeat scroll -566px -242px transparent
+
+.ok
+  background: url("/images/silk.png") repeat scroll -6px -4px transparent
+
+.cancel
+  background: url("/images/silk.png") repeat scroll -286px -293px transparent
 
 .unpaid
   background-color: #ffffa0

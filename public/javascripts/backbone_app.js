@@ -18,6 +18,7 @@ $(document).ready(function() {
   service_invoice_items_view = new ServiceInvoiceItemsView({el: $('#service_invoice_items-' + service_invoice_items.invoice_id)});
   customers.fetch({success: function(){customers_view.render();}});
   invoicing_parties.fetch({success: function(){invoicing_parties_view.render();}});
+
   //setInterval(function(){
     //customers.fetch({success: function(){customers_view.render();}});
     //invoicing_parties.fetch({success: function(){invoicing_parties_view.render();}});

@@ -2,18 +2,20 @@
 <ul>
   <% customers.each(function(m) { %>
   <li id="customer-<%= m.get('id') %>">
-  <strong class="name" title="click for details"><%= m.get('name') %></strong>
-    (<%= m.get('number') %>)
-    <button type="button" class="details" title="click for details"></button> <button type="button" class="invoices"></button> <button type="button" class="edit"></button> <button type="button" class="delete"></button>
-     <ul class="details-list">
-       <li>street: <%= m.get('street') %></li>
-       <li>post_code: <%= m.get('post_code') %></li>
-       <li>city: <%= m.get('city') %></li>
-       <li>country: <%= m.get('country') %></li>
-       <li>telephone: <%= m.get('telephone') %></li>
-       <li>email: <%= m.get('email') %></li>
+  <strong class="name" title="click for details"><%= m.get('name') %>(<%= m.get('number') %>)</strong>
+    <button type="button" class="details" title="click for details"></button>
+    <button type="button" class="invoices" title="click to see this customers invoices"></button>
+    <button type="button" class="edit" title="click to edit"></button>
+    <button type="button" class="delete" title="click to destroy (no questions asked!)"></button>
+    <ul class="details-list">
+      <li>street: <%= m.get('street') %></li>
+      <li>post_code: <%= m.get('post_code') %></li>
+      <li>city: <%= m.get('city') %></li>
+      <li>country: <%= m.get('country') %></li>
+      <li>telephone: <%= m.get('telephone') %></li>
+      <li>email: <%= m.get('email') %></li>
     </ul>
   </li>
   <% }); %>
 </ul>
-
+<div id="customer-form" class="window"></div>

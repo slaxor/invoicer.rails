@@ -6,7 +6,8 @@ gem 'rails', '3.0.0'
 gem 'mysql'
 gem 'unicorn'
 gem 'capistrano'
-gem 'ruby-debug', :group => [:test, :development] unless RUBY_DESCRIPTION.match(/(rubinius|1\.9)/) #rubinius and mri 1.9.x can't do "linecache"
+# gem 'ruby-debug', :group => [:test, :development] unless RUBY_DESCRIPTION.match(/(rubinius|1\.9)/) #rubinius and mri 1.9.x can't do "linecache"
+gem 'ruby-debug19', :group => [:test, :development]
 gem 'json'
 gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => 'rails3'
 gem 'haml'

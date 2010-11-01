@@ -11,7 +11,7 @@
 
   $.fn.harvest = function() {
     var form = {};
-    this.each(function(index, el) {
+    this.children('input|option').each(function(index, el) {
       form[$(el).attr('name')] = el.value
     });
     return form
