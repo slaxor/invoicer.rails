@@ -6,6 +6,7 @@ gem 'rails', '3.0.0'
 gem 'mysql'
 gem 'unicorn'
 gem 'capistrano'
+gem 'capistrano-ext'
 # gem 'ruby-debug', :group => [:test, :development] unless RUBY_DESCRIPTION.match(/(rubinius|1\.9)/) #rubinius and mri 1.9.x can't do "linecache"
 gem 'ruby-debug19', :group => [:test, :development]
 gem 'json'
