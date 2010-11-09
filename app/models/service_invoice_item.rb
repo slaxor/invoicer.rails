@@ -12,6 +12,8 @@ class ServiceInvoiceItem < ActiveRecord::Base
     case pricing_strategy
     when 'fixed'
       price
+    when 'hourly'
+      price * hours
     else
       raise 'ImplementationWorkToDo'
     end
