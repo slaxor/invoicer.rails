@@ -1,8 +1,8 @@
 development: &dev
   adapter: mysql
   database: invoicer_development
-  username: invoicer
-  password: invoicer
+  username: root
+  password: 
   host: 127.0.0.1
 
 test: &test
