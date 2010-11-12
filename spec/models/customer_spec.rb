@@ -1,7 +1,7 @@
-require 'shoulda'
+require 'spec_helper'
 describe Customer do
   describe 'associations' do
-      should_belong_to :user
+    it { should belong_to :user }
   end
 end
 

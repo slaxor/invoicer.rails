@@ -108,8 +108,8 @@ pdf.move_down 60
 pdf.table(
   invoice_items,
   :border_style => :grid,
-  :font_size => 8,
-  :position => :left,
+  :font_size => 6,
+  :position => :center,
   :headers => ['Anfang', 'Ende', 'Pausen', 'Stunden', 'Beschreibung', 'Betrag', 'Mwst.-Satz', 'Mwst.', 'Brutto'],
   :align_headers => :center,
   :header_color => 'f0f0f0',

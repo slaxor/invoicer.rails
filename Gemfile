@@ -15,17 +15,23 @@ gem 'authlogic', :git => 'git://github.com/odorcicd/authlogic.git', :branch => '
 gem 'haml'
 gem 'prawn'
 # gem "compass", ">= 0.10.6" #ausprobieren wenn das styling ansteht
+
+group :development do
+  gem 'rails3-generators'
+  gem 'rspec-rails', '2.0.1'
+end
+
 group :test do
+  gem 'rspec', '2.0.1'
   gem 'shoulda'
-  gem 'rspec'
   gem 'factory_girl'
+  
   gem 'faker'
-  gem 'rspec'
-  gem "rspec-rails", ">= 2.0.1"
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'cucumber-rails'
-  gem 'cucumber'
-  gem 'spork'
-  gem 'launchy'    # So you can do Then show me the page
+  # gem 'cucumber-rails'
+  # gem 'cucumber'
+  # gem 'spork'
+  # gem 'launchy'    # So you can do Then show me the page
 end
+

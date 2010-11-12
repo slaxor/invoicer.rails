@@ -4,7 +4,6 @@ class BackboneController < ApplicationController
   end
 
   def show
-    params[:model] = JSON.parse(params[:model]) if params[:model]
     render :json => {:model => query_model}
   end
 
@@ -19,7 +18,6 @@ class BackboneController < ApplicationController
   end
 
   def destroy
-    params[:model] = JSON.parse(params[:model]) if params[:model]
     render :json => {:model => query_model}
   end
   private

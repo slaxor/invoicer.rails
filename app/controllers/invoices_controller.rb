@@ -25,9 +25,9 @@ class InvoicesController < BackboneController
     when 'index'
       current_user.customers.find(params[:customer_id]).invoices
     when 'create'
-      (current_user.customers.find(params[:customer_id]).invoices << Invoice.create(params[:model])).last
+      (current_user.customers.find(params[:customer_id]).invoices << Invoice.create!(params[:model].except(:status))).last
     when 'update'
-      current_user.customers.find(params[:customer_id]).invoices.update(params[:id], params[:model])
+      current_user.customers.find(params[:customer_id]).invoices.update(params[:id], params[:model].except(:status))
     when 'destroy'
       current_user.customers.find(params[:customer_id]).invoices.destroy(params[:id])
     end

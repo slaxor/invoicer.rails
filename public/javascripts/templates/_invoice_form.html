@@ -2,20 +2,22 @@
 <form>
   <fieldset>
     <input type="hidden" name="id" value="<%= m.get('id') %>">
-    <label for="number">Number</label>
-    <input type="text" name="number" value="<%= m.get('number') %>"/>
-    <label for="covering_text">Covering text</label>
-    <input type="text" name="covering_text" value="<%= m.get('covering_text') %>" />
-    <label for="paid">Paid</label>
-    <input type="checkbox" name="paid" checked="<%= m.get('paid') ? 'checked' : '' %>" />
-    <label for="printed_at">Printed at</label>
-    <input type="text" name="printed_at" value="<%= m.get('printed_at') %>" />
-    <label for="invoicing_party">Invoicing party</label>
-    <select name="invoicing_party">
+    <label for="invoicing_party_id">Invoicing party</label>
+    <select name="invoicing_party_id">
     <% invoicing_parties.each(function(m) { %>
       <option value="<%= m.get('id') %>"><%= m.get('name') %></option>
     <% }); %>
     </select>
+    <label for="number">Number</label>
+    <input type="text" name="number" value="<%= m.get('number') %>"/>
+    <label for="covering_text">Covering text</label>
+    <textarea name="covering_text" cols="40"  rows="3"><%= m.get('covering_text') %></textarea>
+    <label for="paid">Paid</label>
+    <input type="checkbox" name="paid" "<%= m.get('paid') ? 'checked' : '' %>" value="true"/>
+    <label for="printed_at">Printed at</label>
+    <input type="text" name="printed_at" value="<%= m.get('printed_at') %>" />
+    <label for="due_on">Due on</label>
+    <input type="text" name="due_on" value="<%= m.get('due_on') %>" />
     <button type="button" class="ok" title="click to create your invoice"></button>
     <button type="button" class="cancel" title="click to abandon this dialog"></button>
   </fieldset>

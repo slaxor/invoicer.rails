@@ -1,6 +1,6 @@
 describe ServiceInvoiceItem do
   describe 'associations' do
-    should_belong_to :invoice
+    it { should belong_to :invoice }
   end
 end
 

@@ -1,8 +1,6 @@
 set :application, "invoicer.rails"
 #set :repository,  "git://github.com/slaxor/invoicer.rails.git"
 set :repository,  Dir.pwd
-#require 'ruby-debug'
-#debugger
 set :scm, :git
 role :web, "127.0.0.1", :primary=>true
 role :app, "127.0.0.1", :primary=>true

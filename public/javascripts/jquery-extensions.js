@@ -11,8 +11,17 @@
 
   $.fn.harvest = function() {
     var form = {};
-    this.children('input|option').each(function(index, el) {
-      form[$(el).attr('name')] = el.value
+    this.find('input,select,textarea').each(function(index, el) {
+      var $el =$(el);
+      if($(el + '[type=checkbox]')) {
+        console.log(el);
+        if($(el).is(':checked')) {
+          //form.hasOwnProperty(el.attr('name')) ? form[el.attr('name')].push(el.value) : form[el.attr('name')] = [el.value];
+        }
+      } else {
+        console.log('not chkbx');
+        form[$el.attr('name')] = el.value;
+      }
     });
     return form
   }

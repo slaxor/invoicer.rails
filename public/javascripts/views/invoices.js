@@ -10,6 +10,7 @@ var InvoicesView = Backbone.View.extend({
   },
   get_invoice_id: function(e) {return $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];},
   invoices_collections: {},
+
   render: function() {
     $('#invoices').html(_.template(invoices_template, invoices))
     this.handleEvents();
@@ -26,6 +27,8 @@ var InvoicesView = Backbone.View.extend({
   handle_create: function(e) {
     this.form = this.form || get_template('invoice_form');
     var $invoice_form = $('#invoice-form').html(_.template(this.form, {m: invoices.add().last()}));
+    $invoice_form.find('due_on').datepicker({dateFormat: 'yy-mm-dd'});
+    $invoice_form.find('printed_at').datepicker();
   },
   handle_edit: function(e) {
     this.form = this.form || get_template('invoice_form');
