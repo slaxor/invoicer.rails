@@ -6,3 +6,6 @@ public/stylesheets/*.css
 db/*.sql
 tmp/**
 **.rbc
+config/database.yml
+.rvmrc
+
