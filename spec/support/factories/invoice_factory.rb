@@ -1,3 +1,4 @@
+# coding: utf-8
 Factory.define :random_invoice, :class => Invoice do |f|
   f.association :customer, :factory => :random_customer
   f.association :invoicing_party, :factory => :random_invoicing_party

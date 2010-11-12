@@ -1,3 +1,4 @@
+# coding: utf-8
 Factory.define :random_invoicing_party, :class => InvoicingParty do |f|
   f.association :user, :factory => :random_user
   f.name { Faker::Name.name }

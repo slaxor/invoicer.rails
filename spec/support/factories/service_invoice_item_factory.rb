@@ -1,3 +1,4 @@
+# coding: utf-8
 Factory.define :random_service_invoice_item, :class => ServiceInvoiceItem do |f|
   f.association :invoice, :factory => :random_invoice
   f.hourly_wage 1234
