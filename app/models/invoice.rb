@@ -5,11 +5,6 @@ class Invoice < ActiveRecord::Base
   validates_uniqueness_of :number, :scope => :invoicing_party_id
   attr_protected :invoicing_party_id, :customer_id, :default_id
 
-  # should make sure the due date is never before the print date
-  before_save do
-    (self.due_on = Date.today + 7.days) if due_on.to_time < printed_at
-  end
-
   def set_default_number
     self.number = format('%s-%s%0.3i', customer.number, Time.now.to_s(:month_stamp), self.class.count(:conditions => {:customer_id => customer_id}))
   end
