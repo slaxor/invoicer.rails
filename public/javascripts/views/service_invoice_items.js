@@ -7,7 +7,7 @@ var ServiceInvoiceItemsView = Backbone.View.extend({
   service_invoice_items_collections: {},
   render: function() {
     $('#service-invoice-items').html(_.template(service_invoice_items_template, service_invoice_items))
-    this.handleEvents();
+    //this.handleEvents();
     return this;
   },
 

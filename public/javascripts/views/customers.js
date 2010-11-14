@@ -10,11 +10,11 @@ var CustomersView = Backbone.View.extend({
   },
   render: function() {
     $('#customers').html(_.template(customers_template, customers))
-    this.handleEvents();
+    //this.handleEvents();
     return this;
   },
 
-  get_customer_id: function(e) {return $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];},
+  get_customer_id: function(e) {console.info(e) ; return $(e.currentTarget).parent().attr('id').match(/(\d+)$/)[1];},
 
   handle_details: function(e) {
     $(e.currentTarget).siblings('.details-list').toggleClass('show');

@@ -7,7 +7,7 @@ var InvoicingPartiesView = Backbone.View.extend({
   },
   render: function() {
     $('#invoicing_parties').html(_.template(invoicing_parties_template, invoicing_parties))
-    this.handleEvents();
+    //this.handleEvents();
     return this;
   },
   handle_details: function(e) {

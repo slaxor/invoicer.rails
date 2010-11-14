@@ -12,17 +12,17 @@
   $.fn.harvest = function() {
     var form = {};
     this.find('input,select,textarea').each(function(index, el) {
-      var $el =$(el);
-      if($(el + '[type=checkbox]')) {
+      var $el = $(el);
+      if($el.attr('type') == 'checkbox') {
         console.log(el);
-        if($(el).is(':checked')) {
-          //form.hasOwnProperty(el.attr('name')) ? form[el.attr('name')].push(el.value) : form[el.attr('name')] = [el.value];
+        if($el.is(':checked')) {
+          form.hasOwnProperty($el.attr('name')) ? form[$el.attr('name')].push(el.value) : form[$el.attr('name')] = [el.value];
         }
       } else {
         console.log('not chkbx');
         form[$el.attr('name')] = el.value;
       }
     });
-    return form
+    return form;
   }
 })(jQuery);

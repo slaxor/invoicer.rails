@@ -13,7 +13,7 @@ var InvoicesView = Backbone.View.extend({
 
   render: function() {
     $('#invoices').html(_.template(invoices_template, invoices))
-    this.handleEvents();
+    //this.handleEvents();
     return this;
   },
   handle_details: function(e) {
