@@ -1,0 +1,16 @@
+
+<li id="customer-<%= id %>">
+<strong class="name"><%= name %>(<%= number %>)</strong>
+  <button type="button" class="details" title="click for details"></button>
+  <button type="button" class="invoices" title="click to see this customers invoices"></button>
+  <button type="button" class="edit" title="click to edit"></button>
+  <button type="button" class="delete" title="click to destroy (no questions asked!)"></button>
+  <ul class="details-list">
+    <li>street: <%= street %></li>
+    <li>post_code: <%= post_code %></li>
+    <li>city: <%= city %></li>
+    <li>country: <%= country %></li>
+    <li>telephone: <%= telephone %></li>
+    <li>email: <%= email %></li>
+  </ul>
+</li>

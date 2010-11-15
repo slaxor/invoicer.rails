@@ -2,7 +2,6 @@ class CustomersController < BackboneController
   private
   def query_model(options = {})
     action = options[:action] || params.delete(:action)
-    debugger
     case action
     when 'index'
       current_user.customers

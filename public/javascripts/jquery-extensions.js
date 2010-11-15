@@ -13,13 +13,11 @@
     var form = {};
     this.find('input,select,textarea').each(function(index, el) {
       var $el = $(el);
-      if($el.attr('type') == 'checkbox') {
-        console.log(el);
+      if($el.attr('type') === 'checkbox') {
         if($el.is(':checked')) {
           form.hasOwnProperty($el.attr('name')) ? form[$el.attr('name')].push(el.value) : form[$el.attr('name')] = [el.value];
         }
       } else {
-        console.log('not chkbx');
         form[$el.attr('name')] = el.value;
       }
     });

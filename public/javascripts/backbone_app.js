@@ -1,24 +1,64 @@
-var get_template = function(template) {
-  var t = $.ajax({url: '/javascripts/templates/_' + template + '.html', type: 'GET', async: false});
-  return t.responseText;
-}
+var TemplateResolver = (function() {
+  var get_template = function(template) {
+    var t = $.ajax({url: '/javascripts/templates/_' + template + '.html', type: 'GET', async: false});
+    return _.template(t.responseText);
+  };
+  var template_names = ['customer',
+    'invoicing_party', 'invoice', 'service_invoice_item',
+    'invoicing_party', 'customer_form', 'invoice_form' // ...
+    ];
+  var templates = _.reduce(template_names, function (memo, name) {
+    memo[name] = get_template(name);
+    return memo;
+  }, {});
+  return {
+    get: function (name) {
+      return templates[name] || (function () { throw 'No such template ' + name; })();
+    }
+  };
+})();
 
-var customers = new CustomerCollection;
 var invoicing_parties = new InvoicingPartyCollection;
 var invoices = new InvoiceCollection;
 var service_invoice_items = new ServiceInvoiceItemCollection;
-var customers_template = get_template('customers');
-var invoicing_parties_template = get_template('invoicing_parties');
-var invoices_template = get_template('invoices');
-var service_invoice_items_template = get_template('service_invoice_items');
+//var customer_template = get_template('customer');
+//var invoicing_parties_template = get_template('invoicing_parties');
+//var invoices_template = get_template('invoices');
+//var service_invoice_items_template = get_template('service_invoice_items');
 var customers_view, invoicing_parties_view, invoices_view, service_invoice_items_view;
 $(document).ready(function() {
-  customers_view = new CustomersView({el: $('#customers')});
-  invoicing_parties_view = new InvoicingPartiesView({el: $('#invoicing_parties')});
-  invoices_view = new InvoicesView({el: $('#invoices')});
-  service_invoice_items_view = new ServiceInvoiceItemsView({el: $('#service_invoice_items-' + service_invoice_items.invoice_id)});
-  customers.fetch({success: function(){customers_view.render();}});
-  invoicing_parties.fetch({success: function(){invoicing_parties_view.render();}});
+  var AppView = Backbone.View.extend({
+    events: {
+      'click #new-customer': 'new_customer'
+    },
+    initialize: function () {
+      _.bindAll(this, 'render');
+      var customers = new CustomerCollection;
+      customers.bind('refresh', _.bind(this.add_customers, this, customers));
+      customers.fetch();
+    },
+    add_customer: function($ul, customer) {
+      var view = new CustomerView({model: customer});
+      $ul.append(view.render().el);
+    },
+    add_customers: function(customers) {
+      var $customers = $('#customers');
+      $customers.append('<div id="customer-form">');
+      if (customers.length) {
+        var $ul = $('<ul>').appendTo($('#customers'));
+        customers.each(_.bind(this.add_customer, this, $ul));
+      }
+    },
+    new_customer: function(e) {
+      console.log('new customer');
+      new CustomerFormView({model: new Customer}).render();
+    }
+  });
+  new AppView();
+  //invoicing_parties_view = new InvoicingPartiesView({el: $('#invoicing_parties')});
+  //invoices_view = new InvoicesView({el: $('#invoices')});
+  //service_invoice_items_view = new ServiceInvoiceItemsView({el: $('#service_invoice_items-' + service_invoice_items.invoice_id)});
+  //invoicing_parties.fetch({success: function(){invoicing_parties_view.render();}});
   //$('.window').live('ready', function(e) {console.info(this);$(this).draggable();});
   //setInterval(function(){
     //customers.fetch({success: function(){customers_view.render();}});
