@@ -23,17 +23,18 @@ class BackboneController < ApplicationController
   private
   def query_model(options = {})
     action = options[:action] || params.delete(:action)
+    attributes =  params.select { |k,v| model.column_names.include?(k) } #TODO backbone should properly namespace the attributes
     case action
     when 'index'
-      @collection
+      collection
     when 'show'
-      @collection.find(params[:id])
+      collection.find(params[:id])
     when 'create'
-      (@collection << @model.create!(params)).last
+      (collection << model.create!(params)).last
     when 'update'
-      @collection.update(params[:id], params)
+      collection.find(params[:id]).update_attributes!(attributes)
     when 'destroy'
-      @collection.destroy(params[:id])
+      collection.destroy!(params[:id])
     end
   end
 end
