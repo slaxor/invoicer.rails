@@ -1,6 +1,3 @@
-<h4>Invoicing Parties <button class="create"></button></h4>
-<ul>
-  <% invoicing_parties.each(function(m) { %>
   <li id="invoicing_party-<%= m.get('id') %>">
     <strong class="name" ><%= m.get('name') %></strong>
     <button type="button" class="details" title="click for details">
@@ -23,6 +20,4 @@
       <li>email: <%= m.get('email') %></li>
     </ul>
   </li>
-  <% }); %>
-</ul>
 

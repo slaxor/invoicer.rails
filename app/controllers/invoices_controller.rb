@@ -2,16 +2,17 @@ class InvoicesController < BackboneController
   def show
     respond_to do |format|
       @invoice = current_user.customers.find(params[:customer_id]).invoices.find(params[:id])
+      filename = "invoice_#{@invoice.customer.name}_#{@invoice.number}".gsub(/[^A-Za-z0-9]/, '_')
       format.json { render :json => {:model => @invoice }}
       format.html { render :json => {:model => @invoice }}
       format.tex do
         @invoice.update_attribute(:printed_at, Time.now) unless @invoice.printed_at
-        headers['Content-Disposition'] = %Q(attachment; filename="invoice_#{@invoice.customer.name}_#{@invoice.number}.tex")
+        headers['Content-Disposition'] = %Q(attachment; filename="#{filename}.tex")
       end
       format.pdf do
         @invoice.update_attribute(:printed_at, Time.now) unless @invoice.printed_at
         prawnto(
-          :filename => "invoice_#{@invoice.customer.name}_#{@invoice.number}.pdf",
+          :filename => "#{filename}.pdf",
           :prawn => {:page_size => 'A4', :left_margin => 80, :right_margin => 50, :bottom_margin => 10 }
         )
       end

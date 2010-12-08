@@ -24,13 +24,17 @@ var service_invoice_items = new ServiceInvoiceItemCollection;
 $(document).ready(function () {
   var AppView = Backbone.View.extend({
     events: {
-      'click #new-customer': 'new_customer'
+      'click #new-customer': 'new_customer',
+      'click #new-invoicing-party': 'new_invoicing_party'
     },
     initialize: function () {
       _.bindAll(this, 'render');
       var customers = new CustomerCollection;
       customers.bind('refresh', _.bind(this.add_customers, this, customers));
       customers.fetch();
+      var invoicing_parties = new InvoicingPartyCollection;
+      invoicing_parties.bind('refresh', _.bind(this.add_invoicing_parties, this, invoicing_parties));
+      invoicing_parties.fetch();
     },
     add_customer: function ($ul, customer) {
       var view = new CustomerView({model: customer});
@@ -38,26 +42,29 @@ $(document).ready(function () {
     },
     add_customers: function (customers) {
       var $customers = $('#customers');
-      //$('body').append('<div id="customer-form" class="window">');
       if (customers.length) {
         var $ul = $('<ul>').appendTo($('#customers'));
         customers.each(_.bind(this.add_customer, this, $ul));
       }
     },
+    add_invoicing_party: function ($ul, invoicing_party) {
+      var view = new InvoicingPartyView({model: invoicing_party});
+      $ul.append(view.render().el);
+    },
+    add_invoicing_parties: function (invoicing_parties) {
+      var $invoicing_parties = $('#invoicing-parties');
+      if (invoicing_parties.length) {
+        var $ul = $('<ul>').appendTo($('#invoicing_parties'));
+        invoicing_parties.each(_.bind(this.add_invoicing_party, this, $ul));
+      }
+    },
     new_customer: function (e) {
-      console.log('new customer');
       new CustomerFormView({model: new Customer, el: $('#customer-form')}).render();
+    },
+    new_invoicing_party: function (e) {
+      new InvoicingPartyFormView({model: new InvoicingParty, el: $('#invoicing-party-form')}).render();
     }
   });
   new AppView();
-  //invoicing_parties_view = new InvoicingPartiesView({el: $('#invoicing_parties')});
-  //invoices_view = new InvoicesView({el: $('#invoices')});
-  //service_invoice_items_view = new ServiceInvoiceItemsView({el: $('#service_invoice_items-' + service_invoice_items.invoice_id)});
-  //invoicing_parties.fetch({success: function (){invoicing_parties_view.render();}});
-  //$('.window').live('ready', function (e) {console.info(this);$(this).draggable();});
-  //setInterval(function (){
-    //customers.fetch({success: function (){customers_view.render();}});
-    //invoicing_parties.fetch({success: function (){invoicing_parties_view.render();}});
-  //},300000)
 });
 
