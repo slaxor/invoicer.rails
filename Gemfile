@@ -15,14 +15,13 @@ gem 'prawn'
 
 group :development do
   gem 'rails3-generators'
-  gem 'rspec-rails', '2.0.1'
 end
 
 group :test do
-  gem 'rspec', '2.0.1'
+  gem 'rspec' # , '2.0.1'
+  gem 'rspec-rails' #, '2.0.1'
   gem 'shoulda'
   gem 'factory_girl'
-
   gem 'faker'
   gem 'capybara'
   gem 'database_cleaner'

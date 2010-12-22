@@ -180,8 +180,8 @@ DEPENDENCIES
   prawn
   rails (= 3.0.0)
   rails3-generators
-  rspec (= 2.0.1)
-  rspec-rails (= 2.0.1)
+  rspec
+  rspec-rails
   ruby-debug
   ruby-debug19
   shoulda
