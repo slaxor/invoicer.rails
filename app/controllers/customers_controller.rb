@@ -1,10 +1,4 @@
-class CustomersController < BackboneController
-  private
-  def model
-    Customer
+class CustomersController < ApplicationController
+  active_scaffold :customer do |conf|
   end
-
-  def collection
-    current_user.customers
-  end
-end
+end 

@@ -1,4 +1,4 @@
-InvoicerRails::Application.configure do
+InvoicerAs::Application.configure do
   # Settings specified here will take precedence over those in config/environment.rb
 
   # The test environment is used exclusively to run your application's
@@ -6,7 +6,7 @@ InvoicerRails::Application.configure do
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs.  Don't rely on the data there!
   config.cache_classes = true
-  config.active_support.deprecation = :stderr
+
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true
 
@@ -29,4 +29,7 @@ InvoicerRails::Application.configure do
   # This is necessary if your schema can't be completely dumped by the schema dumper,
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
+
+  # Print deprecation notices to the stderr
+  config.active_support.deprecation = :stderr
 end
