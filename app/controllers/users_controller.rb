@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_filter :require_no_user, :only => [:new, :create]
   skip_before_filter :require_user, :only => [:new, :create]
 
-  layout 'user'
+  active_scaffold :user do |conf|
+  end
 
   def new
     @user = User.new

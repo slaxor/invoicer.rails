@@ -1,8 +1,8 @@
 # Be sure to restart your server when you modify this file.
 
-InvoicerAs::Application.config.session_store :cookie_store, :key => '_invoicer.as_session'
+InvoicerRails::Application.config.session_store :cookie_store, :key => '_invoicer.rails_session'
 
 # Use the database for sessions instead of the cookie-based default,
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rake db:sessions:create")
-# InvoicerAs::Application.config.session_store :active_record_store
+# InvoicerRails::Application.config.session_store :active_record_store

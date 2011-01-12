@@ -1,0 +1,11 @@
+!!! 5 utf-8
+%html
+  %head
+    %title InvoicerRails
+    = stylesheet_link_tag 'invoicer.css', 'jquery-ui-1.8.5.custom.css', :cache => true
+    = javascript_include_tag %w(jquery-1.4.2.min.js jquery-ui-1.8.5.custom.min.js jquery-extensions.js rails_jquery.js jquery-ui-timepicker-addon.js application.js), :cache => true
+    = active_scaffold_includes
+    = csrf_meta_tag
+  %body
+    = yield
+
