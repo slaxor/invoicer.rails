@@ -16,6 +16,7 @@ after "deploy:migrations", "deploy:cleanup"
 #desc "link in production database configuration"
 task :after_update_code, :roles => [:app] do
   run "ln -nfs #{shared_path}/bundle #{release_path}/vendor/bundle"
+  run "ln -nfs #{shared_path}/database.yml #{release_path}/config/database.yml"
   run "(cd #{release_path};bundle install --deployment --without=test)"
 end
 

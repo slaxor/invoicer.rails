@@ -1,5 +1,5 @@
 InvoicerRails::Application.routes.draw do
-  resources :users do as_routes
+  resources :users do
     resources :pauses do as_routes end
     resources :service_invoice_items do as_routes end
     resources :invoices do as_routes end
