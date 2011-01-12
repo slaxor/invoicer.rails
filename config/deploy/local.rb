@@ -2,6 +2,7 @@ set :application, "invoicer.rails"
 #set :repository,  "git://github.com/slaxor/invoicer.rails.git"
 set :repository,  Dir.pwd
 set :scm, :git
+set :git_enable_submodules, true
 role :web, "127.0.0.1", :primary=>true
 role :app, "127.0.0.1", :primary=>true
 role :db,  "127.0.0.1", :primary=>true
